@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/HOME"
+        android:title="HOME"
+        android:icon="@drawable/baseline_home_24"/>
+    <item android:id="@+id/SEARCH"
+        android:title="SEARCH"
+        android:icon="@drawable/baseline_search_24"/>
+    <item android:id="@+id/LIBRARY"
+        android:title="LIBRARY"
+        android:icon="@drawable/baseline_library_music_24"/>
+    <item android:id="@+id/MENU"
+        android:title="MENU"
+        android:icon="@drawable/baseline_menu_24"/>
+</menu>
