@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.doan_10.R;
+import com.example.doan_10.View.SongArtistActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,7 +100,7 @@ public class Fragment_Menu extends Fragment {
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), com.example.doan_10.View.LoginActivity.class);
                 startActivity(intent);
             }
         });

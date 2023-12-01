@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_Menu"
-    tools:context=".View.FragmentHome.MyPlaylistActivity">
+    tools:context=".View.MyPlaylistActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +19,7 @@
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:contentDescription="Back"
             android:background="@drawable/baseline_arrow_back_ios_24"/>
         <TextView
             android:layout_width="wrap_content"
@@ -31,9 +32,8 @@
             android:textColor="@color/color_text"
             android:textSize="25sp" />
     </RelativeLayout>
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
+        android:id="@+id/AddPlaylist"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/btn"
@@ -43,4 +43,15 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         app:cornerRadius="20dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/id_item_playlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 </LinearLayout>

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.doan_10.R;
+import com.example.doan_10.View.AllSongsActivity;
+import com.example.doan_10.View.MyHistoryActivity;
+import com.example.doan_10.View.MyPlaylistActivity;
 
 /**
  * A simple {@link Fragment} subclass.

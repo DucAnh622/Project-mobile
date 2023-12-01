@@ -1,4 +1,4 @@
-package com.example.doan_10.View.FragmentHome;
+package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;

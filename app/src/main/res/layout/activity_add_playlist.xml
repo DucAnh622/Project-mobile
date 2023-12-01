@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/image_background"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".View.RegisterActivity">
+    android:background="@color/background_Menu"
+    tools:context=".View.AddPlaylistActivity">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_logo"
         android:layout_margin="30dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp">
@@ -29,67 +28,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="Register"
+                android:text="Playlist"
                 android:textAlignment="center"
                 android:textColor="@color/color_text"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/playlist"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/text_signup_in"
                 android:drawablePadding="8dp"
                 android:fontFamily="sans-serif"
-                android:hint="Username"
-                android:drawableLeft="@drawable/baseline_person_24"
+                android:hint="My playlist 1"
+                android:drawableLeft="@drawable/baseline_queue_music_24"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/color_text"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:textColorHint="@color/color_text" />
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/text_signup_in"
-                android:drawablePadding="8dp"
-                android:fontFamily="sans-serif"
-                android:hint="Email"
-                android:drawableLeft="@drawable/baseline_email_24"
-                android:inputType="text"
-                android:padding="8dp"
-                android:textColor="@color/color_text"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:textColorHint="@color/color_text" />
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/text_signup_in"
-                android:drawablePadding="8dp"
-                android:fontFamily="sans-serif"
-                android:hint="Password"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColor="@color/color_text"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:textColorHint="@color/color_text" />
-
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/registerButton"
+                android:id="@+id/SubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn"
-                android:text="Register"
+                android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
@@ -105,13 +71,4 @@
                 app:cornerRadius="20dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/toLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="Have an account? Login now"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
 </LinearLayout>

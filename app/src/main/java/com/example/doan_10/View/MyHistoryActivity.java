@@ -1,9 +1,10 @@
-package com.example.doan_10.View.FragmentHome;
+package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,11 +22,18 @@ public class MyHistoryActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back.setVisibility(View.GONE);
-                Fragment fragment = new Fragment_Library();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.Library_Fragment,fragment).commit();
+                onBackPressed();
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        // Tạo intent để quay trở lại Fragment Library
+        super.onBackPressed();
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("selected_fragment", "library");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 }

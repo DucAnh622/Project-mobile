@@ -11,33 +11,45 @@
         android:theme="@style/Theme.DoAn_10"
         tools:targetApi="31">
         <activity
-            android:name=".View.FragmentHome.MyHistoryActivity"
+            android:name=".View.SongPlaylist"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.MyPlaylistActivity"
+            android:name=".View.ListenActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.AllSongsActivity"
+            android:name=".View.SongArtistActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.ManageAccountActivity"
+            android:name=".View.AddPlaylistActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.HomeActivity"
+            android:name=".View.MyHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.RegisterActivity"
+            android:name=".View.MyPlaylistActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.LoginActivity"
+            android:name=".View.AllSongsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.ManageAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.DoAn_10" />
         <activity
-            android:name=".View.FragmentHome.MainActivity"
+            android:name=".View.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FragmentHome.SplashActivity"
+            android:name=".View.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

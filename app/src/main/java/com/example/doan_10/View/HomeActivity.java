@@ -1,4 +1,4 @@
-package com.example.doan_10.View.FragmentHome;
+package com.example.doan_10.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         adapterViewFragment = new AdapterViewFragment(this);
         viewPager2.setAdapter(adapterViewFragment);
+        viewPager2.setUserInputEnabled(false);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
