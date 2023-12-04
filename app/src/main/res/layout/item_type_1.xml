@@ -5,7 +5,11 @@
     app:cardCornerRadius="10dp"
     android:layout_marginTop="10dp"
     android:background="@color/background_logo"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    android:clickable="true"
+    android:onClick="onSongClick">
     <RelativeLayout
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -46,20 +50,32 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/add_Playlist"
-            android:layout_toStartOf="@+id/playCircle"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_favorite"
             android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="45dp"
             android:layout_height="30dp"
-            android:src="@drawable/baseline_add_circle_outline_24"/>
-        <ImageView
-            android:id="@+id/playCircle"
+            android:contentDescription="Add favorite"
+            android:background="@drawable/baseline_favorite_border_24"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_playlist"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/baseline_play_arrow_24"/>
+            android:contentDescription="Add playlist"
+            android:visibility="gone"
+            android:background="@drawable/baseline_add_circle_outline_24"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/remove_playlist"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="remove playlist"
+            android:visibility="gone"
+            android:background="@drawable/baseline_remove_circle_outline_24"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

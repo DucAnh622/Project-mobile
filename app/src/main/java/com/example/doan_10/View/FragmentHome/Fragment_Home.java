@@ -1,23 +1,40 @@
 package com.example.doan_10.View.FragmentHome;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.doan_10.Adapter.ArtistAdapter;
+import com.example.doan_10.Adapter.PlaylistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Model.Artist;
+import com.example.doan_10.Model.Playlist;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
+import com.example.doan_10.View.AddSongPlaylistActivity;
+import com.example.doan_10.View.HomeActivity;
+import com.example.doan_10.View.LoginActivity;
+import com.example.doan_10.View.MyPlaylistActivity;
+import com.example.doan_10.View.TopArtistActivity;
+import com.example.doan_10.View.TopSongActivity;
 
 import java.util.ArrayList;
 
@@ -36,12 +53,10 @@ public class Fragment_Home extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private  View view;
     private RecyclerView top_song, top_artist;
     private ArrayList<Song> ListSong;
     private ArrayList<Artist> ListArtist;
-
     private SongAdapter songAdapter;
     private ArtistAdapter artistAdapter;
     private ImageSlider slider;
@@ -100,25 +115,46 @@ public class Fragment_Home extends Fragment {
         slideModels.add(new SlideModel(R.drawable.slider4, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.slider5, ScaleTypes.FIT));
         slider.setImageList(slideModels, ScaleTypes.FIT);
+        TextView[] textViews = new TextView[2];
+        int[] textViewIds = {R.id.Top_songs_id,R.id.Top_Artist_id};
+        for (int i = 0; i < textViews.length; i++) {
+            textViews[i] = view.findViewById(textViewIds[i]);
+            final int index = i;
+            textViews[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (index) {
+                        case 0:
+                            Intent intent1 = new Intent(getContext(), TopSongActivity.class);
+                            startActivity(intent1);
+                            break;
+                        case 1:
+                            Intent intent2 = new Intent(getContext(), TopArtistActivity.class);
+                            startActivity(intent2);
+                            break;
+                    }
+                }
+            });
+        }
         return view;
     }
 
     private void prepareSongData() {
         ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng");
+        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
 
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ");
+        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ",true);
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider3, "Cho  mình em", "Binz ft Đen");
+        song = new Song(R.drawable.slider3, "Cho  mình em", "Binz ft Đen",true);
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly");
+        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly",true);
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider5, "Waiting for you", "Mono");
+        song = new Song(R.drawable.slider5, "Waiting for you", "Mono",true);
         ListSong.add(song);
     }
 

@@ -6,11 +6,12 @@ public class Song {
     private int ImageId;
     private String nameSong;
     private String singer;
-
-    public Song (int ImageId, String nameSong, String singer) {
+    private Boolean check;
+    public Song (int ImageId, String nameSong, String singer, Boolean check) {
         this.ImageId = ImageId;
         this.nameSong = nameSong;
         this.singer = singer;
+        this.check = check;
     }
 
     public int getImageId() {
@@ -31,6 +32,14 @@ public class Song {
 
     public String getSinger() {
         return singer;
+    }
+
+    public Boolean getCheck() {
+        return check;
+    }
+
+    public void setCheck(Boolean check) {
+        this.check = check;
     }
 
     public void setSinger(String singer) {

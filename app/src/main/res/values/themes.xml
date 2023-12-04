@@ -3,7 +3,9 @@
     <style name="Base.Theme.DoAn_10" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:itemBackground">@color/background_logo</item>
+        <item name="android:overlapAnchor">true</item>
+        <item name="android:textColor">@color/color_text</item>
     </style>
-
     <style name="Theme.DoAn_10" parent="Base.Theme.DoAn_10" />
 </resources>

@@ -1,17 +1,24 @@
 package com.example.doan_10.View.FragmentHome;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import android.view.View;
 import android.view.LayoutInflater;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.doan_10.R;
+import com.example.doan_10.View.MyPlaylistActivity;
 import com.example.doan_10.View.SongArtistActivity;
 
 /**

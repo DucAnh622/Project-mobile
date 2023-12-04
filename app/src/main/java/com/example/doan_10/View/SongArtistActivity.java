@@ -44,7 +44,7 @@ public class SongArtistActivity extends AppCompatActivity {
     }
     private void prepareSongData() {
         ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng");
+        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
         ListSong.add(song);
     }
     @Override

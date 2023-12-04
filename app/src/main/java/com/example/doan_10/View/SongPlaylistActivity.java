@@ -1,8 +1,6 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,19 +12,23 @@ import android.widget.Button;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
-import com.example.doan_10.View.FragmentHome.Fragment_Library;
 
 import java.util.ArrayList;
 
-public class MyHistoryActivity extends AppCompatActivity {
-    private Button back;
+public class SongPlaylistActivity extends AppCompatActivity {
     private RecyclerView top_song;
     private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
+    private Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_history);
+        setContentView(R.layout.activity_song_playlist);
+        prepareSongData();
+        top_song = findViewById(R.id.id_song_playlist);
+        top_song.setLayoutManager(new LinearLayoutManager(SongPlaylistActivity.this));
+        songAdapter = new SongAdapter(SongPlaylistActivity.this,ListSong);
+        top_song.setAdapter(songAdapter);
         back = findViewById(R.id.BackView);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,11 +36,11 @@ public class MyHistoryActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        prepareSongData();
-        top_song = findViewById(R.id.id_song_history);
-        top_song.setLayoutManager(new LinearLayoutManager(MyHistoryActivity.this));
-        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong);
-        top_song.setAdapter(songAdapter);
+    }
+    private void prepareSongData() {
+        ListSong = new ArrayList<>();
+        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",false);
+        ListSong.add(song);
     }
     @Override
     public void onBackPressed() {
@@ -49,10 +51,5 @@ public class MyHistoryActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();
-    }
-    private void prepareSongData() {
-        ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
-        ListSong.add(song);
     }
 }

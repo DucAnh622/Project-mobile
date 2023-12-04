@@ -5,7 +5,11 @@
     app:cardCornerRadius="10dp"
     android:layout_marginTop="10dp"
     android:background="@color/background_logo"
-    android:layout_height="wrap_content">
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:onClick="onPlaylistClick">
     <RelativeLayout
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -37,20 +41,23 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/add_Playlist"
-            android:layout_toStartOf="@+id/playCircle"
-            android:layout_centerVertical="true"
-            android:layout_width="30dp"
-            android:layout_marginEnd="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/baseline_mode_edit_24"/>
-        <ImageView
-            android:id="@+id/playCircle"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/setting_playlist"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:contentDescription="Delete playlist"
             android:layout_width="30dp"
+            android:padding="8dp"
             android:layout_height="30dp"
-            android:src="@drawable/baseline_delete_24"/>
+            android:background="@drawable/baseline_more_horiz_24"/>
+        <CheckBox
+            android:id="@+id/type_checkbox"
+            android:layout_width="wrap_content"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

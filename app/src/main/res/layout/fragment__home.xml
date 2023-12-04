@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:id="@+id/Home_Fragment"
     tools:context=".View.FragmentHome.Fragment_Home"
-    android:paddingBottom="100dp">
+    android:paddingBottom="80dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"

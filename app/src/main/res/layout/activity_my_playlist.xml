@@ -10,8 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:background="@color/background_logo">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/BackView"
@@ -38,8 +38,8 @@
         android:layout_height="50dp"
         android:background="@drawable/btn"
         android:text="Add playlist"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:cornerRadius="20dp" />
@@ -51,7 +51,8 @@
             android:id="@+id/id_item_playlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp">
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </LinearLayout>

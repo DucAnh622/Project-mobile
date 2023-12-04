@@ -10,8 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:background="@color/background_logo">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/BackView"
@@ -37,16 +37,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp">
-        <ImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/all_history"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:contentDescription="sort song"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:background="@drawable/baseline_sort_24"/>
-        <ImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:contentDescription="delete history"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@drawable/baseline_auto_delete_24"/>
@@ -59,6 +61,7 @@
             android:id="@+id/id_song_history"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"/>
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
     </LinearLayout>
 </LinearLayout>

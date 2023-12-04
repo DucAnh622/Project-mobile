@@ -4,12 +4,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doan_10.Model.Playlist;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 
@@ -38,9 +40,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         if (song == null) {
             return;
         }
-        holder.imageSong.setImageResource(song.getImageId());
-        holder.nameSong.setText(getEllipsizedText(song.getNameSong(), holder.nameSong));
-        holder.singer.setText(getEllipsizedText(song.getSinger(), holder.singer));
+        holder.bind(song);
     }
 
     @Override
@@ -55,11 +55,28 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         private ImageView imageSong;
         private TextView nameSong, singer;
 
+        private Button add, remove;
+
         public SongViewHolder(@NonNull View itemView) {
             super(itemView);
             imageSong = itemView.findViewById(R.id.ImageId);
             nameSong = itemView.findViewById(R.id.song_id);
             singer = itemView.findViewById(R.id.singer_id);
+            add = itemView.findViewById(R.id.add_playlist);
+            remove = itemView.findViewById(R.id.remove_playlist);
+        }
+
+        public void bind(Song song) {
+            if (song.getCheck()) {
+                add.setVisibility(View.VISIBLE);
+                remove.setVisibility(View.GONE);
+            } else {
+                add.setVisibility(View.GONE);
+                remove.setVisibility(View.VISIBLE);
+            }
+            nameSong.setText(getEllipsizedText(song.getNameSong(), nameSong));
+            singer.setText(getEllipsizedText(song.getSinger(), singer));
+            imageSong.setImageResource(song.getImageId());
         }
     }
 

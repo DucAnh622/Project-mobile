@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:padding="15dp">
+        android:padding="10dp">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/BackView"
             android:layout_width="30dp"
@@ -61,7 +61,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp">
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/song_artist_id"
             android:orientation="vertical"

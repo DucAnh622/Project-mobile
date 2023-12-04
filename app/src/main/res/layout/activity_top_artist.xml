@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@color/background_Menu"
-    tools:context=".View.AllSongsActivity">
+    tools:context=".View.TopArtistActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,14 +27,14 @@
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/BackView"
             android:gravity="center"
-            android:text="My favorite"
+            android:text="Top Artists"
             android:textColor="@color/color_text"
             android:textSize="25sp" />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sortButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:contentDescription="sort song"
+            android:contentDescription="sort artist"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@drawable/baseline_sort_24"/>
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_all_song"
+            android:id="@+id/artist_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="10dp"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_Menu"
-    tools:context=".View.AllSongsActivity">
+    tools:context=".View.TopSongActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/BackView"
             android:gravity="center"
-            android:text="My favorite"
+            android:text="Top Songs"
             android:textColor="@color/color_text"
             android:textSize="25sp" />
         <androidx.appcompat.widget.AppCompatButton
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/id_all_song"
+            android:id="@+id/song_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="10dp"

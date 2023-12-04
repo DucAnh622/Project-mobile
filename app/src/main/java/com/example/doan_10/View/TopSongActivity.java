@@ -1,8 +1,6 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,11 +12,10 @@ import android.widget.Button;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
-import com.example.doan_10.View.FragmentHome.Fragment_Library;
 
 import java.util.ArrayList;
 
-public class MyHistoryActivity extends AppCompatActivity {
+public class TopSongActivity extends AppCompatActivity {
     private Button back;
     private RecyclerView top_song;
     private ArrayList<Song> ListSong;
@@ -26,7 +23,7 @@ public class MyHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_history);
+        setContentView(R.layout.activity_top_song);
         back = findViewById(R.id.BackView);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,9 +32,9 @@ public class MyHistoryActivity extends AppCompatActivity {
             }
         });
         prepareSongData();
-        top_song = findViewById(R.id.id_song_history);
-        top_song.setLayoutManager(new LinearLayoutManager(MyHistoryActivity.this));
-        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong);
+        top_song = findViewById(R.id.song_top);
+        top_song.setLayoutManager(new LinearLayoutManager(TopSongActivity.this));
+        songAdapter = new SongAdapter(TopSongActivity.this,ListSong);
         top_song.setAdapter(songAdapter);
     }
     @Override
@@ -53,6 +50,19 @@ public class MyHistoryActivity extends AppCompatActivity {
     private void prepareSongData() {
         ListSong = new ArrayList<>();
         Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
+
+        ListSong.add(song);
+
+        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ",true);
+        ListSong.add(song);
+
+        song = new Song(R.drawable.slider3, "Cho  mình em", "Binz ft Đen",true);
+        ListSong.add(song);
+
+        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly",true);
+        ListSong.add(song);
+
+        song = new Song(R.drawable.slider5, "Waiting for you", "Mono",true);
         ListSong.add(song);
     }
 }

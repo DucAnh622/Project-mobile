@@ -3,17 +3,26 @@ package com.example.doan_10.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.doan_10.Adapter.SongAdapter;
+import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.FragmentHome.Fragment_Library;
 
+import java.util.ArrayList;
+
 public class AllSongsActivity extends AppCompatActivity {
     private Button back;
+    private RecyclerView top_song;
+    private ArrayList<Song> ListSong;
+    private SongAdapter songAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +34,11 @@ public class AllSongsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        prepareSongData();
+        top_song = findViewById(R.id.id_all_song);
+        top_song.setLayoutManager(new LinearLayoutManager(AllSongsActivity.this));
+        songAdapter = new SongAdapter(AllSongsActivity.this,ListSong);
+        top_song.setAdapter(songAdapter);
     }
     @Override
     public void onBackPressed() {
@@ -36,5 +50,9 @@ public class AllSongsActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
+    private void prepareSongData() {
+        ListSong = new ArrayList<>();
+        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
+        ListSong.add(song);
+    }
 }
