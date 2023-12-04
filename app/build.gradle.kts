@@ -32,6 +32,10 @@ android {
 }
 
 dependencies {
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.0")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata:2.6.0")
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -44,4 +48,10 @@ dependencies {
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    // retrofit
+
+    implementation ("com.squareup.retrofit2:retrofit:2.4.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.4.0")
+    //picasso
+    implementation ("com.squareup.picasso:picasso:2.71828")
 }
