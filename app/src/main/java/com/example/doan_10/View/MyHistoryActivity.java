@@ -34,11 +34,11 @@ public class MyHistoryActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        prepareSongData();
-        top_song = findViewById(R.id.id_song_history);
-        top_song.setLayoutManager(new LinearLayoutManager(MyHistoryActivity.this));
-        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong);
-        top_song.setAdapter(songAdapter);
+//        prepareSongData();
+//        top_song = findViewById(R.id.id_song_history);
+//        top_song.setLayoutManager(new LinearLayoutManager(MyHistoryActivity.this));
+//        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong);
+//        top_song.setAdapter(songAdapter);
     }
     @Override
     public void onBackPressed() {
