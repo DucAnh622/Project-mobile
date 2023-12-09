@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.doan_10.Model.artists.Artist;
 import com.example.doan_10.Model.artists.ListArtist;
+import com.example.doan_10.Model.search.Search;
 import com.example.doan_10.network.RestApiService;
 import com.example.doan_10.network.RetrofitInstance;
 
@@ -41,6 +42,27 @@ public class ListArtistRepository {
 
             @Override
             public void onFailure(Call<ListArtist> call, Throwable t) {
+                Log.d("listsize", "-> Error   " + t.getMessage());
+            }
+        });
+        return mutableLiveData;
+    }
+
+    public MutableLiveData<List<Artist>> getMutableLiveDataSearch(String key){
+        RestApiService apiService = RetrofitInstance.getApiService();
+        Call<Search> call = apiService.getResultSearch(key);
+        call.enqueue(new Callback<Search>() {
+            @Override
+            public void onResponse(Call<Search> call, Response<Search> response) {
+                Search search = response.body();
+                if (search != null && search.getArtists() != null){
+                    listArtist = (ArrayList<Artist>) search.getArtists();
+                    mutableLiveData.setValue(listArtist);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Search> call, Throwable t) {
                 Log.d("listsize", "-> Error   " + t.getMessage());
             }
         });
