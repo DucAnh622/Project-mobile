@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +28,7 @@ import com.example.doan_10.Adapter.PlaylistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Model.Artist;
 import com.example.doan_10.Model.Playlist;
-import com.example.doan_10.Model.Song;
+import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.AddSongPlaylistActivity;
 import com.example.doan_10.View.HomeActivity;
@@ -35,8 +36,11 @@ import com.example.doan_10.View.LoginActivity;
 import com.example.doan_10.View.MyPlaylistActivity;
 import com.example.doan_10.View.TopArtistActivity;
 import com.example.doan_10.View.TopSongActivity;
+import com.example.doan_10.viewmodels.ListArtistViewModel;
+import com.example.doan_10.viewmodels.ListSongViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,11 +59,13 @@ public class Fragment_Home extends Fragment {
     private String mParam2;
     private  View view;
     private RecyclerView top_song, top_artist;
-    private ArrayList<Song> ListSong;
-    private ArrayList<Artist> ListArtist;
+    private List<Song> ListSong;
+    private List<Artist> ListArtist;
     private SongAdapter songAdapter;
     private ArtistAdapter artistAdapter;
     private ImageSlider slider;
+    private ListArtistViewModel listArtistViewModel;
+    private ListSongViewModel listSongViewModel;
 
     public Fragment_Home() {
         // Required empty public constructor
@@ -96,17 +102,21 @@ public class Fragment_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        prepareSongData();
-        prepareArtistData();
         view =inflater.inflate(R.layout.fragment__home, container, false);
         top_song = view.findViewById(R.id.song_top_id);
         top_artist = view.findViewById(R.id.artist_top_id);
         top_artist.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         top_song.setLayoutManager(new LinearLayoutManager(getContext()));
-        songAdapter = new SongAdapter(getContext(),ListSong);
-        artistAdapter = new ArtistAdapter(getContext(),ListArtist);
-        top_song.setAdapter(songAdapter);
-        top_artist.setAdapter(artistAdapter);
+        listArtistViewModel = new ViewModelProvider(this).get(ListArtistViewModel.class);
+        listArtistViewModel.getListArtist().observe(this.getViewLifecycleOwner(), list -> {
+            artistAdapter = new ArtistAdapter(this.getContext(), list);
+            top_artist.setAdapter(artistAdapter);
+        });
+        listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
+        listSongViewModel.getListSong().observe(this.getViewLifecycleOwner(), list -> {
+            songAdapter = new SongAdapter(this.getContext(), list);
+            top_song.setAdapter(songAdapter);
+        });
         slider = view.findViewById(R.id.imageSlider);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
         slideModels.add(new SlideModel(R.drawable.slider1, ScaleTypes.FIT));
@@ -139,36 +149,6 @@ public class Fragment_Home extends Fragment {
         return view;
     }
 
-    private void prepareSongData() {
-        ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
 
-        ListSong.add(song);
 
-        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ",true);
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider3, "Cho  mình em", "Binz ft Đen",true);
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly",true);
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider5, "Waiting for you", "Mono",true);
-        ListSong.add(song);
-    }
-
-    private void prepareArtistData() {
-        ListArtist = new ArrayList<>();
-        Artist artist = new Artist(R.drawable.slider1, "Sơn Tùng");
-        ListArtist.add(artist);
-        artist = new Artist(R.drawable.slider2, "Vũ");
-        ListArtist.add(artist);
-        artist = new Artist(R.drawable.slider3, "Binz & Đen");
-        ListArtist.add(artist);
-        artist = new Artist(R.drawable.slider4, "Phương Ly");
-        ListArtist.add(artist);
-        artist = new Artist(R.drawable.slider5, "Mono");
-        ListArtist.add(artist);
-    }
 }

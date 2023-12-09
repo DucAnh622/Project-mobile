@@ -11,18 +11,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.doan_10.Model.Artist;
+import com.example.doan_10.Model.artists.Artist;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
-    private ArrayList<Artist> ListArtist;
+    private List<Artist> ListArtist;
 
     private Context context;
 
-    public ArtistAdapter(Context context, ArrayList<Artist> ListArtist) {
+    public ArtistAdapter(Context context, List<Artist> ListArtist) {
         this.ListArtist = ListArtist;
         this.context = context;
     }
@@ -40,7 +42,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         if (artist == null) {
             return;
         }
-        holder.imageArtist.setImageResource(artist.getImageId());
+        String urlImage = artist.getAvatar();
+        Picasso.get().load(urlImage).into(holder.imageArtist);
         holder.nameArtist.setText(getEllipsizedText(artist.getName(), holder.nameArtist));
     }
 

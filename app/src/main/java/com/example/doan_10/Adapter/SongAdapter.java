@@ -12,17 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan_10.Model.Playlist;
-import com.example.doan_10.Model.Song;
+import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
-    private ArrayList<Song> ListSong;
+    private List<Song> ListSong;
 
     private Context context;
 
-    public SongAdapter(Context context, ArrayList<Song> ListSong) {
+    public SongAdapter(Context context, List<Song> ListSong) {
         this.ListSong = ListSong;
         this.context = context;
     }
@@ -40,7 +42,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         if (song == null) {
             return;
         }
-        holder.bind(song);
+        holder.nameSong.setText(getEllipsizedText(song.getTitle(), holder.nameSong));
+        String urlAvatar = song.getAvatar();
+        Picasso.get().load(urlAvatar).into(holder.imageSong);
+        holder.singer.setText(getEllipsizedText(song.getNameArtist(), holder.singer));
     }
 
     @Override
@@ -66,22 +71,22 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             remove = itemView.findViewById(R.id.remove_playlist);
         }
 
-        public void bind(Song song) {
-            if (song.getCheck()) {
-                add.setVisibility(View.VISIBLE);
-                remove.setVisibility(View.GONE);
-            } else {
-                add.setVisibility(View.GONE);
-                remove.setVisibility(View.VISIBLE);
-            }
-            nameSong.setText(getEllipsizedText(song.getNameSong(), nameSong));
-            singer.setText(getEllipsizedText(song.getSinger(), singer));
-            imageSong.setImageResource(song.getImageId());
-        }
+//        public void bind(Song song) {
+//            if (song.getCheck()) {
+//                add.setVisibility(View.VISIBLE);
+//                remove.setVisibility(View.GONE);
+//            } else {
+//                add.setVisibility(View.GONE);
+//                remove.setVisibility(View.VISIBLE);
+//            }
+//            nameSong.setText(getEllipsizedText(song.getNameSong(), nameSong));
+//            singer.setText(getEllipsizedText(song.getSinger(), singer));
+//            imageSong.setImageResource(song.getImageId());
+//        }
     }
 
     private String getEllipsizedText(String text, TextView textView) {
-        int maxLength = 20;
+        int maxLength = 16;
         if (text.length() > maxLength) {
             String ellipsizedText = text.substring(0, maxLength - 3) + "...";
             textView.setEllipsize(TextUtils.TruncateAt.END);

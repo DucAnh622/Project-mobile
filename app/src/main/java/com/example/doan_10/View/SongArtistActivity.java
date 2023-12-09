@@ -37,10 +37,10 @@ public class SongArtistActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        top_song = findViewById(R.id.song_artist_id);
-        top_song.setLayoutManager(new LinearLayoutManager(SongArtistActivity.this));
-        songAdapter = new SongAdapter(SongArtistActivity.this,ListSong);
-        top_song.setAdapter(songAdapter);
+//        top_song = findViewById(R.id.song_artist_id);
+//        top_song.setLayoutManager(new LinearLayoutManager(SongArtistActivity.this));
+//        songAdapter = new SongAdapter(SongArtistActivity.this,ListSong);
+//        top_song.setAdapter(songAdapter);
     }
     private void prepareSongData() {
         ListSong = new ArrayList<>();

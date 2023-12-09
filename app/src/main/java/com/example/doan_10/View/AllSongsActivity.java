@@ -34,11 +34,11 @@ public class AllSongsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        prepareSongData();
-        top_song = findViewById(R.id.id_all_song);
-        top_song.setLayoutManager(new LinearLayoutManager(AllSongsActivity.this));
-        songAdapter = new SongAdapter(AllSongsActivity.this,ListSong);
-        top_song.setAdapter(songAdapter);
+//        prepareSongData();
+//        top_song = findViewById(R.id.id_all_song);
+//        top_song.setLayoutManager(new LinearLayoutManager(AllSongsActivity.this));
+//        songAdapter = new SongAdapter(AllSongsActivity.this,ListSong);
+//        top_song.setAdapter(songAdapter);
     }
     @Override
     public void onBackPressed() {

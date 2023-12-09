@@ -24,11 +24,11 @@ public class SongPlaylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_playlist);
-        prepareSongData();
-        top_song = findViewById(R.id.id_song_playlist);
-        top_song.setLayoutManager(new LinearLayoutManager(SongPlaylistActivity.this));
-        songAdapter = new SongAdapter(SongPlaylistActivity.this,ListSong);
-        top_song.setAdapter(songAdapter);
+//        prepareSongData();
+//        top_song = findViewById(R.id.id_song_playlist);
+//        top_song.setLayoutManager(new LinearLayoutManager(SongPlaylistActivity.this));
+//        songAdapter = new SongAdapter(SongPlaylistActivity.this,ListSong);
+//        top_song.setAdapter(songAdapter);
         back = findViewById(R.id.BackView);
         back.setOnClickListener(new View.OnClickListener() {
             @Override

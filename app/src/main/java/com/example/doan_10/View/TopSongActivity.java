@@ -1,6 +1,7 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.widget.Button;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
+import com.example.doan_10.viewmodels.ListSongViewModel;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class TopSongActivity extends AppCompatActivity {
     private RecyclerView top_song;
     private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
+    private ListSongViewModel listSongViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,12 @@ public class TopSongActivity extends AppCompatActivity {
         prepareSongData();
         top_song = findViewById(R.id.song_top);
         top_song.setLayoutManager(new LinearLayoutManager(TopSongActivity.this));
-        songAdapter = new SongAdapter(TopSongActivity.this,ListSong);
-        top_song.setAdapter(songAdapter);
+        listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
+        listSongViewModel.getListSong().observe(this, list ->{
+            songAdapter = new SongAdapter(TopSongActivity.this, list);
+            top_song.setAdapter(songAdapter);
+        });
+
     }
     @Override
     public void onBackPressed() {
