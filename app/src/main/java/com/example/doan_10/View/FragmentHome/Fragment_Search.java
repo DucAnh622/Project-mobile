@@ -3,6 +3,9 @@ package com.example.doan_10.View.FragmentHome;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,7 +16,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doan_10.Adapter.ArtistAdapter;
+import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.R;
+import com.example.doan_10.viewmodels.ListArtistViewModel;
+import com.example.doan_10.viewmodels.ListSongViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +39,11 @@ public class Fragment_Search extends Fragment {
     private String mParam2;
 
     private EditText searchButton;
+    private RecyclerView listSearchArtist, listSearchSong;
+    private ListSongViewModel listSongViewModel;
+    private ListArtistViewModel listArtistViewModel;
+    private ArtistAdapter artistAdapter;
+    private SongAdapter songAdapter;
 
     public Fragment_Search() {
         // Required empty public constructor
@@ -70,7 +82,10 @@ public class Fragment_Search extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment__search, container, false);
         EditText searchButton = view.findViewById(R.id.SearchView);
-
+        listSearchArtist = view.findViewById(R.id.list_rs_artist);
+        listSearchSong = view.findViewById(R.id.list_rs_song);
+        listSearchArtist.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        listSearchSong.setLayoutManager(new LinearLayoutManager(getContext()));
         searchButton.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int i, KeyEvent keyEvent) {
@@ -84,7 +99,7 @@ public class Fragment_Search extends Fragment {
                     }
                     else {
                         Toast.makeText(getActivity(), "get "+keyword+" successfully!" , Toast.LENGTH_SHORT).show();
-                        getSearchResult();
+                        getSearchResult(keyword);
                     }
                     searchButton.setText("");
                 }
@@ -94,7 +109,17 @@ public class Fragment_Search extends Fragment {
         return  view;
     }
 
-    private void getSearchResult() {
+    private void getSearchResult(String key) {
+        listArtistViewModel = new ViewModelProvider(this).get(ListArtistViewModel.class);
+        listArtistViewModel.getListArtistSearch(key).observe(this.getViewLifecycleOwner(), list ->{
+            artistAdapter = new ArtistAdapter(this.getContext(), list);
+            listSearchArtist.setAdapter(artistAdapter);
+        });
 
+        listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
+        listSongViewModel.getListSongSearch(key).observe(this.getViewLifecycleOwner(), list -> {
+            songAdapter = new SongAdapter(this.getContext(), list);
+            listSearchSong.setAdapter(songAdapter);
+        });
     }
 }

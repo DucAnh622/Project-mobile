@@ -21,4 +21,8 @@ public class ListArtistViewModel extends AndroidViewModel {
     public LiveData<List<Artist>> getListArtist(){
         return listArtistRepository.getMutableLiveData();
     }
+
+    public LiveData<List<Artist>> getListArtistSearch(String key){
+        return listArtistRepository.getMutableLiveDataSearch(key);
+    }
 }

@@ -20,4 +20,7 @@ public class ListSongViewModel extends AndroidViewModel {
     public LiveData<List<Song>> getListSong(){
         return listSongRepository.getMutableLiveData();
     }
+    public LiveData<List<Song>> getListSongSearch(String key){
+        return listSongRepository.getMutableLiveDataSearch(key);
+    }
 }
