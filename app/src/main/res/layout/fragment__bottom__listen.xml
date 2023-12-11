@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/Bottom_listen_id"
+    android:clickable="true"
+    android:background="@color/background_bottom_listen"
+    tools:context=".View.FragmentHome.Fragemnt_Bottom_Listen">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ImageId"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/slider1"
+        app:civ_border_width="2dp"
+        android:visibility="gone"
+        app:civ_border_color="@color/white"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <LinearLayout
+            android:id="@+id/Title_text"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Song_name"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="Song name 1"
+                android:maxLines="1"
+                android:textSize="22sp"
+                android:textColor="@color/color_text"/>
+            <TextView
+                android:id="@+id/Singer_name"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="Singer 1"
+                android:maxLines="1"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/prev_id"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="Prev"
+            android:layout_toStartOf="@+id/play_id"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/baseline_skip_previous_24"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/play_id"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="Play/Pause"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/next_id"
+            android:background="@drawable/baseline_play_circle_24"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_id"
+            android:layout_marginStart="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="Next"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/baseline_skip_next_24"/>
+    </RelativeLayout>
+</LinearLayout>

@@ -23,12 +23,18 @@
             app:civ_border_color="@color/white"/>
         <TextView
             android:id="@+id/artist_id"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="20dp"
             android:gravity="center"
             android:layout_below="@+id/ImageId"
             android:layout_centerHorizontal="true"
             android:text="Artist 1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
             android:layout_marginTop="5dp"
             android:textColor="@color/color_text"
             android:textSize="15sp">

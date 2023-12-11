@@ -51,6 +51,7 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
         public PlaylistViewHolder(@NonNull View itemView) {
             super(itemView);
             namePlaylist = itemView.findViewById(R.id.playlist_name_id);
+            namePlaylist.setSelected(true);
             checkbox = itemView.findViewById(R.id.type_checkbox);
             setting = itemView.findViewById(R.id.setting_playlist);
             setting.setOnClickListener(this);
@@ -64,7 +65,7 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
                 checkbox.setVisibility(View.GONE);
                 setting.setVisibility(View.VISIBLE);
             }
-            namePlaylist.setText(getEllipsizedText(playlist.getName(), namePlaylist));
+            namePlaylist.setText(playlist.getName());
         }
 
         @Override
@@ -99,16 +100,5 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
             return Playlists.size();
         else
             return 0;
-    }
-    private String getEllipsizedText(String text, TextView textView) {
-        int maxLength = 20;
-        if (text.length() > maxLength) {
-            String ellipsizedText = text.substring(0, maxLength - 3) + "...";
-            textView.setEllipsize(TextUtils.TruncateAt.END);
-            textView.setMaxLines(1);
-            return ellipsizedText;
-        } else {
-            return text;
-        }
     }
 }

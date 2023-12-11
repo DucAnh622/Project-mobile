@@ -53,13 +53,11 @@ public class MyPlaylistActivity extends AppCompatActivity {
         my_playlist.setLayoutManager(new LinearLayoutManager(MyPlaylistActivity.this));
         playlistAdapter = new PlaylistAdapter(MyPlaylistActivity.this,Playlists);
         my_playlist.setAdapter(playlistAdapter);
-        Intent intent = new Intent(this, SongPlaylistActivity.class);
-        startActivity(intent);
     }
     private void preparePlaylistData() {
         Playlists = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
-            String playlistName = "My album " + i;
+            String playlistName = "My playlist " + i;
             Playlist playlist = new Playlist(playlistName, false);
             Playlists.add(playlist);
         }

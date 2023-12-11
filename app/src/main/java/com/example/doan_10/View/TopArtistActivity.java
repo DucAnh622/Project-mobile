@@ -5,19 +5,21 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.doan_10.Adapter.ArtistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
+import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
 import com.example.doan_10.Model.Artist;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 
 import java.util.ArrayList;
 
-public class TopArtistActivity extends AppCompatActivity {
+public class TopArtistActivity extends AppCompatActivity implements RecyclerviewArtistItemOnClick {
     private Button back;
     private RecyclerView top_artist;
     private ArrayList<Artist> ListArtist;
@@ -29,7 +31,7 @@ public class TopArtistActivity extends AppCompatActivity {
         prepareArtistData();
         top_artist = findViewById(R.id.artist_top);
         top_artist.setLayoutManager(new GridLayoutManager(TopArtistActivity.this, 3));
-        artistAdapter = new ArtistAdapter(TopArtistActivity.this,ListArtist);
+        artistAdapter = new ArtistAdapter(TopArtistActivity.this,ListArtist,this);
         top_artist.setAdapter(artistAdapter);
         back = findViewById(R.id.BackView);
         back.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +40,16 @@ public class TopArtistActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        // Tạo intent để quay trở lại Fragment Library
+        super.onBackPressed();
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("selected_fragment", "home");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
     private void prepareArtistData() {
         ListArtist = new ArrayList<>();
@@ -51,5 +63,14 @@ public class TopArtistActivity extends AppCompatActivity {
         ListArtist.add(artist);
         artist = new Artist(R.drawable.slider5, "Mono");
         ListArtist.add(artist);
+    }
+
+    @Override
+    public void onArtistItemClick(int position) {
+        Artist clickedArtist = ListArtist.get(position);
+        Intent intent = new Intent(this, SongArtistActivity.class);
+        intent.putExtra("imageId", clickedArtist.getImageId());
+        intent.putExtra("nameArtist", clickedArtist.getName());
+        startActivity(intent);
     }
 }

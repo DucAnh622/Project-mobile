@@ -6,9 +6,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.doan_10.R;
 import com.example.doan_10.View.FragmentHome.AdapterViewFragment;
+import com.example.doan_10.View.FragmentHome.Fragemnt_Bottom_Listen;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -18,11 +20,13 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     AdapterViewFragment adapterViewFragment;
 
+    Fragemnt_Bottom_Listen fragemntBottomListen;
+    private String SongName,Singer;
+    private int ImageId, File;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         viewPager2 = findViewById(R.id.fragment_wrap);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         adapterViewFragment = new AdapterViewFragment(this);
@@ -67,5 +71,27 @@ public class HomeActivity extends AppCompatActivity {
                 super.onPageSelected(position);
             }
         });
+        if (getIntent().hasExtra("nameSong") && getIntent().hasExtra("singer")&& getIntent().hasExtra("imageId")) {
+            showYourFragment();
+        }
+    }
+    private void showYourFragment() {
+        fragemntBottomListen = new Fragemnt_Bottom_Listen();
+
+        SongName = getIntent().getStringExtra("nameSong");
+        Singer = getIntent().getStringExtra("singer");
+        ImageId = getIntent().getIntExtra("imageId", 0);
+        File = getIntent().getIntExtra("file", -1);
+        Bundle bundle = new Bundle();
+        bundle.putString("nameSong", SongName);
+        bundle.putString("singer", Singer);
+        bundle.putInt("imageId", ImageId);
+        bundle.putInt("file", File);
+        fragemntBottomListen.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragemntBottomListen)
+                .addToBackStack(null)
+                .commit();
     }
 }

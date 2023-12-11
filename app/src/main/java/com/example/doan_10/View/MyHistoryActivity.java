@@ -10,15 +10,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.doan_10.Adapter.SongAdapter;
+import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.FragmentHome.Fragment_Library;
 
 import java.util.ArrayList;
 
-public class MyHistoryActivity extends AppCompatActivity {
+public class MyHistoryActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private Button back;
     private RecyclerView top_song;
     private ArrayList<Song> ListSong;
@@ -37,7 +39,7 @@ public class MyHistoryActivity extends AppCompatActivity {
         prepareSongData();
         top_song = findViewById(R.id.id_song_history);
         top_song.setLayoutManager(new LinearLayoutManager(MyHistoryActivity.this));
-        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong);
+        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong,this);
         top_song.setAdapter(songAdapter);
     }
     @Override
@@ -52,7 +54,20 @@ public class MyHistoryActivity extends AppCompatActivity {
     }
     private void prepareSongData() {
         ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
+        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",R.raw.song1,true);
         ListSong.add(song);
+    }
+
+    @Override
+    public void onSongItemClick(int position) {
+        Song clickedSong = ListSong.get(position);
+        Intent intent = new Intent(this, ListenActivity.class);
+        intent.putExtra("imageId", clickedSong.getImageId());
+        intent.putExtra("nameSong", clickedSong.getNameSong());
+        intent.putExtra("singer", clickedSong.getSinger());
+        intent.putExtra("file", clickedSong.getFile());
+        intent.putExtra("ListSong",ListSong);
+        intent.putExtra("IndexSong", position);
+        startActivity(intent);
     }
 }

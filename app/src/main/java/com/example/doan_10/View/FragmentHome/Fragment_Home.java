@@ -25,14 +25,18 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.doan_10.Adapter.ArtistAdapter;
 import com.example.doan_10.Adapter.PlaylistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
+import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
+import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.Model.Artist;
 import com.example.doan_10.Model.Playlist;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.AddSongPlaylistActivity;
 import com.example.doan_10.View.HomeActivity;
+import com.example.doan_10.View.ListenActivity;
 import com.example.doan_10.View.LoginActivity;
 import com.example.doan_10.View.MyPlaylistActivity;
+import com.example.doan_10.View.SongArtistActivity;
 import com.example.doan_10.View.TopArtistActivity;
 import com.example.doan_10.View.TopSongActivity;
 
@@ -43,7 +47,7 @@ import java.util.ArrayList;
  * Use the {@link Fragment_Home#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Home extends Fragment {
+public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnClick, RecyclerviewArtistItemOnClick {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -103,8 +107,8 @@ public class Fragment_Home extends Fragment {
         top_artist = view.findViewById(R.id.artist_top_id);
         top_artist.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         top_song.setLayoutManager(new LinearLayoutManager(getContext()));
-        songAdapter = new SongAdapter(getContext(),ListSong);
-        artistAdapter = new ArtistAdapter(getContext(),ListArtist);
+        songAdapter = new SongAdapter(getContext(),ListSong,this);
+        artistAdapter = new ArtistAdapter(getContext(),ListArtist, this);
         top_song.setAdapter(songAdapter);
         top_artist.setAdapter(artistAdapter);
         slider = view.findViewById(R.id.imageSlider);
@@ -141,20 +145,20 @@ public class Fragment_Home extends Fragment {
 
     private void prepareSongData() {
         ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",true);
+        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",R.raw.song1,true);
 
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ",true);
+        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ",R.raw.song2,true);
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider3, "Cho  mình em", "Binz ft Đen",true);
+        song = new Song(R.drawable.slider3, "Cho mình em", "Binz ft Đen",R.raw.song3,true);
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly",true);
+        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly",R.raw.song4,true);
         ListSong.add(song);
 
-        song = new Song(R.drawable.slider5, "Waiting for you", "Mono",true);
+        song = new Song(R.drawable.slider5, "Waiting for you", "Mono",R.raw.song5,true);
         ListSong.add(song);
     }
 
@@ -170,5 +174,27 @@ public class Fragment_Home extends Fragment {
         ListArtist.add(artist);
         artist = new Artist(R.drawable.slider5, "Mono");
         ListArtist.add(artist);
+    }
+
+    @Override
+    public void onSongItemClick(int position) {
+        Song clickedSong = ListSong.get(position);
+        Intent intent = new Intent(getContext(), ListenActivity.class);
+        intent.putExtra("imageId", clickedSong.getImageId());
+        intent.putExtra("nameSong", clickedSong.getNameSong());
+        intent.putExtra("singer", clickedSong.getSinger());
+        intent.putExtra("file", clickedSong.getFile());
+        intent.putExtra("ListSong",ListSong);
+        intent.putExtra("IndexSong", position);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onArtistItemClick(int position) {
+        Artist clickedArtist = ListArtist.get(position);
+        Intent intent = new Intent(getContext(), SongArtistActivity.class);
+        intent.putExtra("imageId", clickedArtist.getImageId());
+        intent.putExtra("nameArtist", clickedArtist.getName());
+        startActivity(intent);
     }
 }
