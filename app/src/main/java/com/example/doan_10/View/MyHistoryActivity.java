@@ -3,6 +3,7 @@ package com.example.doan_10.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.FragmentHome.Fragment_Library;
+import com.example.doan_10.viewmodels.ListSongViewModel;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class MyHistoryActivity extends AppCompatActivity implements Recyclerview
     private RecyclerView top_song;
     private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
+    private ListSongViewModel listSongViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +39,11 @@ public class MyHistoryActivity extends AppCompatActivity implements Recyclerview
                 onBackPressed();
             }
         });
-        prepareSongData();
+
         top_song = findViewById(R.id.id_song_history);
         top_song.setLayoutManager(new LinearLayoutManager(MyHistoryActivity.this));
-        songAdapter = new SongAdapter(MyHistoryActivity.this,ListSong,this);
-        top_song.setAdapter(songAdapter);
+        prepareSongData();
+
     }
     @Override
     public void onBackPressed() {
@@ -53,21 +56,15 @@ public class MyHistoryActivity extends AppCompatActivity implements Recyclerview
         finish();
     }
     private void prepareSongData() {
-        ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",R.raw.song1,true);
-        ListSong.add(song);
+        listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
+        listSongViewModel.getListSong().observe(this, list -> {
+            songAdapter = new SongAdapter(MyHistoryActivity.this, list, this);
+            top_song.setAdapter(songAdapter);
+        });
     }
 
     @Override
     public void onSongItemClick(int position) {
-        Song clickedSong = ListSong.get(position);
-        Intent intent = new Intent(this, ListenActivity.class);
-        intent.putExtra("imageId", clickedSong.getImageId());
-        intent.putExtra("nameSong", clickedSong.getNameSong());
-        intent.putExtra("singer", clickedSong.getSinger());
-        intent.putExtra("file", clickedSong.getFile());
-        intent.putExtra("ListSong",ListSong);
-        intent.putExtra("IndexSong", position);
-        startActivity(intent);
+
     }
 }

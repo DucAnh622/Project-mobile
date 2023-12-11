@@ -46,13 +46,13 @@ public class SongArtistActivity extends AppCompatActivity implements Recyclervie
                 onBackPressed();
             }
         });
-        top_song = findViewById(R.id.song_artist_id);
-        top_song.setLayoutManager(new LinearLayoutManager(SongArtistActivity.this));
-        songAdapter = new SongAdapter(SongArtistActivity.this,ListSong,this);
-        top_song.setAdapter(songAdapter);
-        ImageArtistId = findViewById(R.id.ImageId);
-        ArtistName = findViewById(R.id.Artist_name);
-        ArtistName.setSelected(true);
+//        top_song = findViewById(R.id.song_artist_id);
+//        top_song.setLayoutManager(new LinearLayoutManager(SongArtistActivity.this));
+//        songAdapter = new SongAdapter(SongArtistActivity.this,ListSong,this);
+//        top_song.setAdapter(songAdapter);
+//        ImageArtistId = findViewById(R.id.ImageId);
+//        ArtistName = findViewById(R.id.Artist_name);
+//        ArtistName.setSelected(true);
         Intent intent = getIntent();
         if (intent != null) {
             imageId = intent.getIntExtra("imageId", 0);

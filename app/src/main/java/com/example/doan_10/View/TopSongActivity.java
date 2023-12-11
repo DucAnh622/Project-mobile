@@ -1,6 +1,7 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
+import com.example.doan_10.viewmodels.ListSongViewModel;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class TopSongActivity extends AppCompatActivity implements RecyclerviewSo
     private RecyclerView top_song;
     private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
+    private ListSongViewModel listSongViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,13 @@ public class TopSongActivity extends AppCompatActivity implements RecyclerviewSo
         prepareSongData();
         top_song = findViewById(R.id.song_top);
         top_song.setLayoutManager(new LinearLayoutManager(TopSongActivity.this));
-        songAdapter = new SongAdapter(TopSongActivity.this,ListSong, this);
-        top_song.setAdapter(songAdapter);
+
+        listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
+        listSongViewModel.getListSong().observe(this, list ->{
+            songAdapter = new SongAdapter(TopSongActivity.this, list, this);
+            top_song.setAdapter(songAdapter);
+        });
+
     }
     @Override
     public void onBackPressed() {
@@ -50,34 +58,19 @@ public class TopSongActivity extends AppCompatActivity implements RecyclerviewSo
         finish();
     }
     private void prepareSongData() {
-        ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",R.raw.song1,true);
 
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider2, "Bước qua nhau", "Vũ",R.raw.song2,true);
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider3, "Cho  mình em", "Binz ft Đen",R.raw.song3,true);
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider4, "Anh là ngoại lệ của em", "Phương Ly",R.raw.song4,true);
-        ListSong.add(song);
-
-        song = new Song(R.drawable.slider5, "Waiting for you", "Mono",R.raw.song5,true);
-        ListSong.add(song);
     }
 
     @Override
     public void onSongItemClick(int position) {
-        Song clickedSong = ListSong.get(position);
-        Intent intent = new Intent(this, ListenActivity.class);
-        intent.putExtra("imageId", clickedSong.getImageId());
-        intent.putExtra("nameSong", clickedSong.getNameSong());
-        intent.putExtra("singer", clickedSong.getSinger());
-        intent.putExtra("file", clickedSong.getFile());
-        intent.putExtra("ListSong",ListSong);
-        intent.putExtra("IndexSong", position);
-        startActivity(intent);
+//        Song clickedSong = ListSong.get(position);
+//        Intent intent = new Intent(this, ListenActivity.class);
+//        intent.putExtra("imageId", clickedSong.getImageId());
+//        intent.putExtra("nameSong", clickedSong.getNameSong());
+//        intent.putExtra("singer", clickedSong.getSinger());
+//        intent.putExtra("file", clickedSong.getFile());
+//        intent.putExtra("ListSong",ListSong);
+//        intent.putExtra("IndexSong", position);
+//        startActivity(intent);
     }
 }
