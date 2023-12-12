@@ -107,10 +107,8 @@ public class ListenActivity extends AppCompatActivity {
                 isTracking = false;
 
                 if (mediaPlayer != null) {
-                    mediaPlayer.setOnPreparedListener(mp -> {
-                        int progress = seekBar.getProgress();
-                        mp.seekTo(progress);
-                    });
+                    int progress = seekBar.getProgress();
+                    mediaPlayer.seekTo(progress);
                 }
             }
         });
