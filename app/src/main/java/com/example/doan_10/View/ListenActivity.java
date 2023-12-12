@@ -1,12 +1,15 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -18,8 +21,12 @@ import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.FragmentHome.Fragemnt_Bottom_Listen;
 import com.example.doan_10.View.FragmentHome.Fragment_Home;
+import com.example.doan_10.viewmodels.SongViewModel;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListenActivity extends AppCompatActivity {
     private Button back_listen, close_listen, random, prev, play, next, replay;
@@ -29,10 +36,13 @@ public class ListenActivity extends AppCompatActivity {
     private String singer;
     private SeekBar seekBar;
     private int imageId, File;
+    private String imageUrl;
     private boolean isTracking = false;
     private MediaPlayer mediaPlayer;
     private ArrayList<Song> ListCurrentSong;
     private int IndexSong;
+    private int id_song;
+    private SongViewModel songViewModel;
     public ListenActivity() {
     }
 
@@ -72,17 +82,17 @@ public class ListenActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            imageId = intent.getIntExtra("imageId", 0);
+            imageUrl = intent.getStringExtra("imageUrl");
             nameSong = intent.getStringExtra("nameSong");
             singer = intent.getStringExtra("singer");
-            ImageSongId.setImageResource(imageId);
-            File = getIntent().getIntExtra("file", -1);
+            Picasso.get().load(imageUrl).into(ImageSongId);
             SongName.setText(nameSong);
             SingerName.setText(singer);
+            String musicUrl = intent.getStringExtra("musicUrl");
             ListCurrentSong = new ArrayList<>();
-            ListCurrentSong = (ArrayList<Song>) getIntent().getSerializableExtra("ListSong");
+//            ListCurrentSong = (ArrayList<Song>) getIntent().getSerializableExtra("ListSong");
             IndexSong = intent.getIntExtra("IndexSong",0);
-            mediaPlayer = MediaPlayer.create(this, File);
+            mediaPlayer = MediaPlayer.create(this, Uri.parse(musicUrl));
             mediaPlayer.start();
             play.setBackgroundResource(R.drawable.baseline_pause_circle_24);
             seekBar.setMax(mediaPlayer.getDuration());
@@ -103,8 +113,10 @@ public class ListenActivity extends AppCompatActivity {
                 isTracking = false;
 
                 if (mediaPlayer != null) {
-                    int progress = seekBar.getProgress();
-                    mediaPlayer.seekTo(progress);
+                    mediaPlayer.setOnPreparedListener(mp -> {
+                        int progress = seekBar.getProgress();
+                        mp.seekTo(progress);
+                    });
                 }
             }
         });
