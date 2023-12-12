@@ -27,6 +27,7 @@ import com.example.doan_10.View.ListenActivity;
 import com.example.doan_10.viewmodels.ListArtistViewModel;
 import com.example.doan_10.viewmodels.ListSongViewModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -141,7 +142,7 @@ public class Fragment_Search extends Fragment {
                     intent.putExtra("singer", song.getNameArtist());
                     intent.putExtra("musicUrl", song.getUrlMusic());
 //                    ArrayList<Song> arrSong = list.stream().collect(Collectors.toCollection(ArrayList::new));
-//                    intent.putExtra("ListSong", arrSong);
+                    intent.putExtra("ListSong", (Serializable) list);
                     intent.putExtra("IndexSong", position);
                     startActivity(intent);
                 }
