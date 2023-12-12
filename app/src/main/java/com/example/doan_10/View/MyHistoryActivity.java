@@ -1,8 +1,6 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,13 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
-import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
-import com.example.doan_10.View.FragmentHome.Fragment_Library;
 import com.example.doan_10.viewmodels.ListSongViewModel;
 
 import java.util.ArrayList;
@@ -25,7 +20,6 @@ import java.util.ArrayList;
 public class MyHistoryActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private Button back;
     private RecyclerView top_song;
-    private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
     private ListSongViewModel listSongViewModel;
     @Override

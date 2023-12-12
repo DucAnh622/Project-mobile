@@ -1,25 +1,22 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
-import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 
 import java.util.ArrayList;
 
 public class SongPlaylistActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private RecyclerView top_song;
-    private ArrayList<Song> ListSong;
+//    private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
     private Button back;
     @Override
@@ -41,9 +38,9 @@ public class SongPlaylistActivity extends AppCompatActivity implements Recyclerv
         });
     }
     private void prepareSongData() {
-        ListSong = new ArrayList<>();
-        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",R.raw.song1,false);
-        ListSong.add(song);
+//        ListSong = new ArrayList<>();
+//        Song song = new Song(R.drawable.slider1, "Nơi này có anh", "Sơn Tùng",R.raw.song1,false);
+//        ListSong.add(song);
     }
     @Override
     public void onBackPressed() {
@@ -58,14 +55,14 @@ public class SongPlaylistActivity extends AppCompatActivity implements Recyclerv
 
     @Override
     public void onSongItemClick(int position) {
-        Song clickedSong = ListSong.get(position);
-        Intent intent = new Intent(this, ListenActivity.class);
-        intent.putExtra("imageId", clickedSong.getImageId());
-        intent.putExtra("nameSong", clickedSong.getNameSong());
-        intent.putExtra("singer", clickedSong.getSinger());
-        intent.putExtra("file", clickedSong.getFile());
-        intent.putExtra("ListSong",ListSong);
-        intent.putExtra("IndexSong", position);
-        startActivity(intent);
+//        Song clickedSong = ListSong.get(position);
+//        Intent intent = new Intent(this, ListenActivity.class);
+//        intent.putExtra("imageId", clickedSong.getImageId());
+//        intent.putExtra("nameSong", clickedSong.getNameSong());
+//        intent.putExtra("singer", clickedSong.getSinger());
+//        intent.putExtra("file", clickedSong.getFile());
+//        intent.putExtra("ListSong",ListSong);
+//        intent.putExtra("IndexSong", position);
+//        startActivity(intent);
     }
 }

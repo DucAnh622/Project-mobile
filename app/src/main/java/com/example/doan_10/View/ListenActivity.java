@@ -1,7 +1,6 @@
 package com.example.doan_10.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -17,14 +15,11 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.doan_10.Model.Song;
+import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
-import com.example.doan_10.View.FragmentHome.Fragemnt_Bottom_Listen;
-import com.example.doan_10.View.FragmentHome.Fragment_Home;
 import com.example.doan_10.viewmodels.SongViewModel;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +34,7 @@ public class ListenActivity extends AppCompatActivity {
     private String imageUrl;
     private boolean isTracking = false;
     private MediaPlayer mediaPlayer;
-    private ArrayList<Song> ListCurrentSong;
+    private List<Song> ListCurrentSong;
     private int IndexSong;
     private int id_song;
     private SongViewModel songViewModel;
@@ -89,8 +84,7 @@ public class ListenActivity extends AppCompatActivity {
             SongName.setText(nameSong);
             SingerName.setText(singer);
             String musicUrl = intent.getStringExtra("musicUrl");
-            ListCurrentSong = new ArrayList<>();
-//            ListCurrentSong = (ArrayList<Song>) getIntent().getSerializableExtra("ListSong");
+            ListCurrentSong = (List<Song>) getIntent().getSerializableExtra("ListSong");
             IndexSong = intent.getIntExtra("IndexSong",0);
             mediaPlayer = MediaPlayer.create(this, Uri.parse(musicUrl));
             mediaPlayer.start();
@@ -235,16 +229,17 @@ public class ListenActivity extends AppCompatActivity {
         }
 
         Song newSong = ListCurrentSong.get(IndexSong);
-        imageId = newSong.getImageId();
-        nameSong = newSong.getNameSong();
-        singer = newSong.getSinger();
-        File = newSong.getFile();
+        imageUrl = newSong.getAvatar();
+        nameSong = newSong.getTitle();
+        singer = newSong.getNameArtist();
+//        File = newSong.getFile();
+        String musicUrl = newSong.getUrlMusic();
 
-        ImageSongId.setImageResource(imageId);
+        Picasso.get().load(imageUrl).into(ImageSongId);
         SongName.setText(nameSong);
         SingerName.setText(singer);
 
-        mediaPlayer = MediaPlayer.create(ListenActivity.this, File);
+        mediaPlayer = MediaPlayer.create(ListenActivity.this, Uri.parse(musicUrl));
         mediaPlayer.start();
         play.setBackgroundResource(R.drawable.baseline_pause_circle_24);
         seekBar.setMax(mediaPlayer.getDuration());
