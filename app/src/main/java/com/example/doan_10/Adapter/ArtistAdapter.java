@@ -51,6 +51,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         }
         String urlImage = artist.getAvatar();
         Picasso.get().load(urlImage).into(holder.imageArtist);
+        holder.nameArtist.setText(artist.getName());
     }
 
     @Override
