@@ -25,7 +25,6 @@ public class Song {
     private List<String> listAlbum;
     @SerializedName("urlMusic")
     private String urlMusic;
-
     public Song(int id, String title, String releaseDate, String duration, String avatar, String genre, String nameArtist, List<Integer> listPlaylist, List<String> listAlbum, String urlMusic) {
         this.id = id;
         this.title = title;

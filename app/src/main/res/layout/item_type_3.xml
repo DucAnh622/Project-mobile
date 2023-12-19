@@ -58,21 +58,21 @@
                 android:textColor="@color/white"/>
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_favorite"
+            android:id="@+id/add_playlist"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_width="30dp"
             android:layout_marginEnd="45dp"
             android:layout_height="30dp"
-            android:contentDescription="Add favorite"
-            android:background="@drawable/baseline_favorite_border_24"/>
+            android:contentDescription="Add playlist"
+            android:background="@drawable/baseline_add_circle_outline_24"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_playlist"
+            android:id="@+id/remove_playlist"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:contentDescription="Add playlist"
-            android:background="@drawable/baseline_add_circle_outline_24"/>
+            android:contentDescription="Remove playlist"
+            android:background="@drawable/baseline_remove_circle_outline_24"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

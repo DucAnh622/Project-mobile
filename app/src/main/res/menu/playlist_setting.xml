@@ -7,7 +7,6 @@
         app:showAsAction="always"
         android:icon="@drawable/baseline_mode_edit_24"
         android:iconTint="@color/background_Menu"/>
-
     <item
         android:id="@+id/playlist_delete"
         android:title="Delete"

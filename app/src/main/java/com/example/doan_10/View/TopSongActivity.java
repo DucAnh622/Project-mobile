@@ -9,27 +9,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
-import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.viewmodels.ListSongViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
 
 public class TopSongActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private Button back;
     private RecyclerView top_song;
-    private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
     private ListSongViewModel listSongViewModel;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_song);
         back = findViewById(R.id.BackView);
+        progressBar = findViewById(R.id.progressBar);
+        Sprite wave = new Wave();
+        progressBar.setIndeterminateDrawable(wave);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +47,7 @@ public class TopSongActivity extends AppCompatActivity implements RecyclerviewSo
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this, list ->{
             songAdapter = new SongAdapter(TopSongActivity.this, list, this);
+            progressBar.setVisibility(View.GONE);
             top_song.setAdapter(songAdapter);
         });
 

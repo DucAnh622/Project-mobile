@@ -14,10 +14,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
-import com.example.doan_10.View.FragmentHome.Fragemnt_Bottom_Listen;
-import com.example.doan_10.View.FragmentHome.Fragment_Home;
 
 import java.util.ArrayList;
 
@@ -31,7 +28,7 @@ public class ListenActivity extends AppCompatActivity {
     private int imageId, File;
     private boolean isTracking = false;
     private MediaPlayer mediaPlayer;
-    private ArrayList<Song> ListCurrentSong;
+//    private ArrayList<Song> ListCurrentSong;
     private int IndexSong;
     public ListenActivity() {
     }
@@ -79,8 +76,8 @@ public class ListenActivity extends AppCompatActivity {
             File = getIntent().getIntExtra("file", -1);
             SongName.setText(nameSong);
             SingerName.setText(singer);
-            ListCurrentSong = new ArrayList<>();
-            ListCurrentSong = (ArrayList<Song>) getIntent().getSerializableExtra("ListSong");
+//            ListCurrentSong = new ArrayList<>();
+//            ListCurrentSong = (ArrayList<Song>) getIntent().getSerializableExtra("ListSong");
             IndexSong = intent.getIntExtra("IndexSong",0);
             mediaPlayer = MediaPlayer.create(this, File);
             mediaPlayer.start();
@@ -129,30 +126,30 @@ public class ListenActivity extends AppCompatActivity {
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
-                    if (IndexSong > 0) {
-                        IndexSong--;
-                        playNewSong();
-                    } else {
-                        IndexSong = ListCurrentSong.size() - 1;
-                    }
-                    playNewSong();
-                }
+//                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
+//                    if (IndexSong > 0) {
+//                        IndexSong--;
+//                        playNewSong();
+//                    } else {
+//                        IndexSong = ListCurrentSong.size() - 1;
+//                    }
+//                    playNewSong();
+//                }
             }
         });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
-                    if (IndexSong < ListCurrentSong.size() - 1) {
-                        IndexSong++;
-                        playNewSong();
-                    }else {
-                        IndexSong = 0;
-                    }
-                    playNewSong();
-                }
+//                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
+//                    if (IndexSong < ListCurrentSong.size() - 1) {
+//                        IndexSong++;
+//                        playNewSong();
+//                    }else {
+//                        IndexSong = 0;
+//                    }
+//                    playNewSong();
+//                }
             }
         });
 
@@ -222,11 +219,11 @@ public class ListenActivity extends AppCompatActivity {
             mediaPlayer.release();
         }
 
-        Song newSong = ListCurrentSong.get(IndexSong);
-        imageId = newSong.getImageId();
-        nameSong = newSong.getNameSong();
-        singer = newSong.getSinger();
-        File = newSong.getFile();
+//        Song newSong = ListCurrentSong.get(IndexSong);
+//        imageId = newSong.getImageId();
+//        nameSong = newSong.getNameSong();
+//        singer = newSong.getSinger();
+//        File = newSong.getFile();
 
         ImageSongId.setImageResource(imageId);
         SongName.setText(nameSong);

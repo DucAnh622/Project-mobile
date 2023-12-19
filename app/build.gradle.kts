@@ -48,6 +48,7 @@ dependencies {
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.ybq:Android-SpinKit:1.4.0")
     // retrofit
 
     implementation ("com.squareup.retrofit2:retrofit:2.4.0")

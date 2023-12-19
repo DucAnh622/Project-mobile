@@ -1,6 +1,6 @@
 package com.example.doan_10.Adapter;
+
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +18,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder> {
+public class SongPlaylistAdapter extends RecyclerView.Adapter<SongPlaylistAdapter.SongPlaylistViewHolder> {
     private final RecyclerviewSongItemOnClick recyclerviewSongItemOnClick;
 
     private List<Song> ListSong;
 
     private Context context;
 
-    public SongAdapter(Context context, List<Song> ListSong, RecyclerviewSongItemOnClick recyclerviewSongItemOnClick) {
+    public SongPlaylistAdapter(Context context, List<Song> ListSong, RecyclerviewSongItemOnClick recyclerviewSongItemOnClick) {
         this.ListSong = ListSong;
         this.context = context;
         this.recyclerviewSongItemOnClick = recyclerviewSongItemOnClick;
@@ -33,13 +33,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
     @NonNull
     @Override
-    public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_type_1, parent, false);
-        return new SongViewHolder(view, recyclerviewSongItemOnClick);
+    public SongPlaylistAdapter.SongPlaylistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_type_3, parent, false);
+        return new SongPlaylistViewHolder(view, recyclerviewSongItemOnClick);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SongViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SongPlaylistAdapter.SongPlaylistViewHolder holder, int position) {
         Song song = ListSong.get(position);
         if (song == null) {
             return;
@@ -58,13 +58,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             return 0;
     }
 
-    public class SongViewHolder extends RecyclerView.ViewHolder {
+    public class SongPlaylistViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageSong;
         private TextView nameSong, singer;
 
-        private Button add;
-
-        public SongViewHolder(@NonNull View itemView, RecyclerviewSongItemOnClick recyclerviewSongItemOnClick) {
+        private Button add, remove;
+        public SongPlaylistViewHolder (@NonNull View itemView, RecyclerviewSongItemOnClick recyclerviewSongItemOnClick) {
             super(itemView);
             imageSong = itemView.findViewById(R.id.ImageId);
             nameSong = itemView.findViewById(R.id.song_id);
@@ -72,6 +71,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             nameSong.setSelected(true);
             singer.setSelected(true);
             add = itemView.findViewById(R.id.add_playlist);
+            remove = itemView.findViewById(R.id.remove_playlist);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -84,20 +84,5 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                 }
             });
         }
-
-
-//        public void bind(Song song) {
-//            if (song.getCheck()) {
-//                add.setVisibility(View.VISIBLE);
-//                remove.setVisibility(View.GONE);
-//            } else {
-//                add.setVisibility(View.GONE);
-//                remove.setVisibility(View.VISIBLE);
-//            }
-//            nameSong.setText(getEllipsizedText(song.getNameSong(), nameSong));
-//            singer.setText(getEllipsizedText(song.getSinger(), singer));
-//            imageSong.setImageResource(song.getImageId());
-//        }
     }
-
 }

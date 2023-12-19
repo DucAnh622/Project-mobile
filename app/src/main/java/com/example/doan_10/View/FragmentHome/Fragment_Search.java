@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.R;
 import com.example.doan_10.viewmodels.ListArtistViewModel;
 import com.example.doan_10.viewmodels.ListSongViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +49,7 @@ public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnC
     private ListArtistViewModel listArtistViewModel;
     private ArtistAdapter artistAdapter;
     private SongAdapter songAdapter;
+    private ProgressBar progressBar1, progressBar2;
 
     public Fragment_Search() {
         // Required empty public constructor
@@ -88,6 +92,13 @@ public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnC
         listSearchSong = view.findViewById(R.id.list_rs_song);
         listSearchArtist.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         listSearchSong.setLayoutManager(new LinearLayoutManager(getContext()));
+        progressBar1 = (ProgressBar) view.findViewById(R.id.progressBar1);
+        progressBar2 = (ProgressBar) view.findViewById(R.id.progressBar2);
+        Sprite wave = new Wave();
+        progressBar1.setIndeterminateDrawable(wave);
+        progressBar2.setIndeterminateDrawable(wave);
+        progressBar1.setVisibility(View.GONE);
+        progressBar2.setVisibility(View.GONE);
         searchButton.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int i, KeyEvent keyEvent) {
@@ -116,12 +127,14 @@ public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnC
         listArtistViewModel.getListArtistSearch(key).observe(this.getViewLifecycleOwner(), list ->{
             artistAdapter = new ArtistAdapter(this.getContext(), list, this);
             listSearchArtist.setAdapter(artistAdapter);
+            progressBar1.setVisibility(View.GONE);
         });
 
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSongSearch(key).observe(this.getViewLifecycleOwner(), list -> {
             songAdapter = new SongAdapter(this.getContext(), list, this);
             listSearchSong.setAdapter(songAdapter);
+            progressBar2.setVisibility(View.GONE);
         });
     }
 
