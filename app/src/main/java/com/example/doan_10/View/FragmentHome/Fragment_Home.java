@@ -123,10 +123,8 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
         });
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this.getViewLifecycleOwner(), list -> {
-<<<<<<< HEAD
             songAdapter = new SongAdapter(this.getContext(), list, this);
             progressBar2.setVisibility(View.GONE);
-=======
             songAdapter = new SongAdapter(this.getContext(), list, new RecyclerviewSongItemOnClick() {
                 @Override
                 public void onSongItemClick(int position) {
@@ -137,14 +135,11 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
                     intent.putExtra("nameSong", song.getTitle());
                     intent.putExtra("singer", song.getNameArtist());
                     intent.putExtra("musicUrl", song.getUrlMusic());
-//                    ArrayList<Song> arrSong = list.stream().collect(Collectors.toCollection(ArrayList::new));
-//                    intent.putExtra("ListSong", arrSong);
                     intent.putExtra("ListSong", (Serializable) list);
                     intent.putExtra("IndexSong", position);
                     startActivity(intent);
                 }
             });
->>>>>>> 5e825f2472350a8d7ee8d912607df3c611cec173
             top_song.setAdapter(songAdapter);
         });
 
