@@ -42,8 +42,10 @@ import com.example.doan_10.viewmodels.ListSongViewModel;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -121,8 +123,28 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
         });
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this.getViewLifecycleOwner(), list -> {
+<<<<<<< HEAD
             songAdapter = new SongAdapter(this.getContext(), list, this);
             progressBar2.setVisibility(View.GONE);
+=======
+            songAdapter = new SongAdapter(this.getContext(), list, new RecyclerviewSongItemOnClick() {
+                @Override
+                public void onSongItemClick(int position) {
+                    Song song = list.get(position);
+                    List<Song> ListSong = list;
+                    Intent intent = new Intent(getContext(), ListenActivity.class);
+                    intent.putExtra("imageUrl", song.getAvatar());
+                    intent.putExtra("nameSong", song.getTitle());
+                    intent.putExtra("singer", song.getNameArtist());
+                    intent.putExtra("musicUrl", song.getUrlMusic());
+//                    ArrayList<Song> arrSong = list.stream().collect(Collectors.toCollection(ArrayList::new));
+//                    intent.putExtra("ListSong", arrSong);
+                    intent.putExtra("ListSong", (Serializable) list);
+                    intent.putExtra("IndexSong", position);
+                    startActivity(intent);
+                }
+            });
+>>>>>>> 5e825f2472350a8d7ee8d912607df3c611cec173
             top_song.setAdapter(songAdapter);
         });
 
@@ -162,14 +184,7 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
     @Override
     public void onSongItemClick(int position) {
 //        Song clickedSong = ListSong.get(position);
-//        Intent intent = new Intent(getContext(), ListenActivity.class);
-//        intent.putExtra("imageId", clickedSong.getImageId());
-//        intent.putExtra("nameSong", clickedSong.getNameSong());
-//        intent.putExtra("singer", clickedSong.getSinger());
-//        intent.putExtra("file", clickedSong.getFile());
-//        intent.putExtra("ListSong",ListSong);
-//        intent.putExtra("IndexSong", position);
-//        startActivity(intent);
+
     }
 
     @Override

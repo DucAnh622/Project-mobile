@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.R;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 public class MyHistoryActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private Button back;
     private RecyclerView top_song;
-//    private ArrayList<Song> ListSong;
     private SongAdapter songAdapter;
     private ListSongViewModel listSongViewModel;
     private ProgressBar progressBar;
