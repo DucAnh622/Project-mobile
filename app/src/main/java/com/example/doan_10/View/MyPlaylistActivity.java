@@ -2,6 +2,7 @@ package com.example.doan_10.View;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.example.doan_10.Adapter.PlaylistAdapter;
 import com.example.doan_10.Model.Playlist;
 import com.example.doan_10.R;
+import com.example.doan_10.viewmodels.PlaylistViewModel;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
     private RecyclerView my_playlist;
     private ArrayList<Playlist> Playlists;
     private PlaylistAdapter playlistAdapter;
+    private PlaylistViewModel playlistViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,19 +51,18 @@ public class MyPlaylistActivity extends AppCompatActivity {
                 showModal(Gravity.CENTER);
             }
         });
-        preparePlaylistData();
         my_playlist = findViewById(R.id.id_item_playlist);
         my_playlist.setLayoutManager(new LinearLayoutManager(MyPlaylistActivity.this));
-        playlistAdapter = new PlaylistAdapter(MyPlaylistActivity.this,Playlists);
-        my_playlist.setAdapter(playlistAdapter);
+        preparePlaylistData();
+
     }
     private void preparePlaylistData() {
-        Playlists = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
-            String playlistName = "My playlist " + i;
-            Playlist playlist = new Playlist(playlistName, false);
-            Playlists.add(playlist);
-        }
+        playlistViewModel = new ViewModelProvider(this).get(PlaylistViewModel.class);
+        playlistViewModel.getAllPlaylist().observe(this, playlists -> {
+            playlistAdapter = new PlaylistAdapter(MyPlaylistActivity.this, playlists);
+            my_playlist.setAdapter(playlistAdapter);
+            playlistAdapter.notifyDataSetChanged();
+        });
     }
     @Override
     public void onBackPressed() {
@@ -106,7 +108,10 @@ public class MyPlaylistActivity extends AppCompatActivity {
                     Toast.makeText(MyPlaylistActivity.this, "Invalid input!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(MyPlaylistActivity.this, "Get "+name_playlist+"successfully!", Toast.LENGTH_SHORT).show();
+                    playlistViewModel = new ViewModelProvider(MyPlaylistActivity.this).get(PlaylistViewModel.class);
+                    playlistViewModel.createPlaylist(name_playlist, 1);
+                    Toast.makeText(MyPlaylistActivity.this, "Created playlist "+name_playlist, Toast.LENGTH_SHORT).show();
+                    preparePlaylistData();
                     dialog.dismiss();
                 }
                 playlist_name.setText("");

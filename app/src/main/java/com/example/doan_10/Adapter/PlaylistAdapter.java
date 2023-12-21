@@ -14,16 +14,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.doan_10.Model.Playlist;
+import com.example.doan_10.Model.playlist.Playlist;
 import com.example.doan_10.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder> {
-    private ArrayList<Playlist> Playlists;
+    private List<Playlist> playlists;
     private Context context;
-    public PlaylistAdapter(Context context, ArrayList<Playlist> Playlists) {
-        this.Playlists = Playlists;
+    public PlaylistAdapter(Context context, List<Playlist> playlists) {
+        this.playlists = playlists;
         this.context = context;
     }
     @NonNull
@@ -34,7 +35,7 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
     }
     @Override
     public void onBindViewHolder(@NonNull PlaylistAdapter.PlaylistViewHolder holder, int position) {
-        Playlist playList = Playlists.get(position);
+        Playlist playList = playlists.get(position);
         if (playList == null) {
             return;
         }
@@ -57,13 +58,13 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
         }
 
         public void bind(Playlist playlist) {
-            if (playlist.getCheck()) {
+//            if (playlist.getCheck()) {
                 checkbox.setVisibility(View.VISIBLE);
                 setting.setVisibility(View.GONE);
-            } else {
-                checkbox.setVisibility(View.GONE);
-                setting.setVisibility(View.VISIBLE);
-            }
+//            } else {
+//                checkbox.setVisibility(View.GONE);
+//                setting.setVisibility(View.VISIBLE);
+//            }
             namePlaylist.setText(playlist.getName());
         }
 
@@ -95,8 +96,8 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
     }
     @Override
     public int getItemCount() {
-        if (Playlists != null && Playlists.size() > 0)
-            return Playlists.size();
+        if (playlists != null && playlists.size() > 0)
+            return playlists.size();
         else
             return 0;
     }

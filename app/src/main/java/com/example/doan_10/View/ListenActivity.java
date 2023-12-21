@@ -132,30 +132,30 @@ public class ListenActivity extends AppCompatActivity {
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
-//                    if (IndexSong > 0) {
-//                        IndexSong--;
-//                        playNewSong();
-//                    } else {
-//                        IndexSong = ListCurrentSong.size() - 1;
-//                    }
-//                    playNewSong();
-//                }
+                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
+                    if (IndexSong > 0) {
+                        IndexSong--;
+                        playNewSong();
+                    } else {
+                        IndexSong = ListCurrentSong.size() - 1;
+                    }
+                    playNewSong();
+                }
             }
         });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
-//                    if (IndexSong < ListCurrentSong.size() - 1) {
-//                        IndexSong++;
-//                        playNewSong();
-//                    }else {
-//                        IndexSong = 0;
-//                    }
-//                    playNewSong();
-//                }
+                if (ListCurrentSong != null && !ListCurrentSong.isEmpty()) {
+                    if (IndexSong < ListCurrentSong.size() - 1) {
+                        IndexSong++;
+                        playNewSong();
+                    }else {
+                        IndexSong = 0;
+                    }
+                    playNewSong();
+                }
             }
         });
 

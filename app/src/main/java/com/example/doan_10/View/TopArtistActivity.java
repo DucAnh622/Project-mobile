@@ -43,7 +43,17 @@ public class TopArtistActivity extends AppCompatActivity implements Recyclerview
         listArtistViewModel = new ViewModelProvider(this).get(ListArtistViewModel.class);
         listArtistViewModel.getListArtist().observe(this, listArtist -> {
             List<Artist> list = listArtist;
-            artistAdapter = new ArtistAdapter(TopArtistActivity.this, list, this);
+            artistAdapter = new ArtistAdapter(TopArtistActivity.this, list, new RecyclerviewArtistItemOnClick() {
+                @Override
+                public void onArtistItemClick(int position) {
+                    Artist artist = list.get(position);
+                    Intent intent = new Intent(TopArtistActivity.this, SongArtistActivity.class);
+                    intent.putExtra("imageUrl", artist.getAvatar());
+                    intent.putExtra("nameArtist", artist.getName());
+                    intent.putExtra("idArtist", artist.getId());
+                    startActivity(intent);
+                }
+            });
             progressBar.setVisibility(View.GONE);
             top_artist.setAdapter(artistAdapter);
         });

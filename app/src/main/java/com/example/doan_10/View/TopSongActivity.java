@@ -12,12 +12,15 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
+import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.viewmodels.ListSongViewModel;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.Wave;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TopSongActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private Button back;
@@ -45,7 +48,21 @@ public class TopSongActivity extends AppCompatActivity implements RecyclerviewSo
 
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this, list ->{
-            songAdapter = new SongAdapter(TopSongActivity.this, list, this);
+            songAdapter = new SongAdapter(TopSongActivity.this, list, new RecyclerviewSongItemOnClick() {
+                @Override
+                public void onSongItemClick(int position) {
+                    Song song = list.get(position);
+                    List<Song> ListSong = list;
+                    Intent intent = new Intent(TopSongActivity.this, ListenActivity.class);
+                    intent.putExtra("imageUrl", song.getAvatar());
+                    intent.putExtra("nameSong", song.getTitle());
+                    intent.putExtra("singer", song.getNameArtist());
+                    intent.putExtra("musicUrl", song.getUrlMusic());
+                    intent.putExtra("ListSong", (Serializable) list);
+                    intent.putExtra("IndexSong", position);
+                    startActivity(intent);
+                }
+            });
             progressBar.setVisibility(View.GONE);
             top_song.setAdapter(songAdapter);
         });
