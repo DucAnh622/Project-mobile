@@ -12,4 +12,6 @@
     <color name="primary">#007bff</color>
     <color name="error">#dc3545</color>
     <color name="warning">#ffc107</color>
+    <color name="edit">#FF03DAC5</color>
+    <color name="se_primary">#1B023B</color>
 </resources>
