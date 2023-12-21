@@ -52,7 +52,8 @@ public class PlaylistRepository {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful() && response.code() == 201){
-                    Log.d("status_create", "successful!: ");
+                    String rs = response.body();
+                    Log.d("status_create", rs);
                 }
                 Log.d("status_create", "fail!");
             }

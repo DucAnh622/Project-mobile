@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doan_10.Interface.RecyclerviewPlaylistItemOnClick;
 import com.example.doan_10.Model.playlist.Playlist;
 import com.example.doan_10.R;
 
@@ -23,15 +24,17 @@ import java.util.List;
 public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.PlaylistViewHolder> {
     private List<Playlist> playlists;
     private Context context;
-    public PlaylistAdapter(Context context, List<Playlist> playlists) {
+    private RecyclerviewPlaylistItemOnClick recyclerviewPlaylistItemOnClick;
+    public PlaylistAdapter(Context context, List<Playlist> playlists, RecyclerviewPlaylistItemOnClick recyclerviewPlaylistItemOnClick) {
         this.playlists = playlists;
         this.context = context;
+        this.recyclerviewPlaylistItemOnClick = recyclerviewPlaylistItemOnClick;
     }
     @NonNull
     @Override
     public PlaylistAdapter.PlaylistViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.playlist_item, parent, false);
-        return new PlaylistAdapter.PlaylistViewHolder(view);
+        return new PlaylistAdapter.PlaylistViewHolder(view, recyclerviewPlaylistItemOnClick);
     }
     @Override
     public void onBindViewHolder(@NonNull PlaylistAdapter.PlaylistViewHolder holder, int position) {
@@ -44,26 +47,32 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
 
     public class PlaylistViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
         private TextView namePlaylist;
-        private CheckBox checkbox;
 
         private Button setting;
 
-        public PlaylistViewHolder(@NonNull View itemView) {
+        public PlaylistViewHolder(@NonNull View itemView, RecyclerviewPlaylistItemOnClick recyclerviewPlaylistItemOnClick) {
             super(itemView);
             namePlaylist = itemView.findViewById(R.id.playlist_name_id);
             namePlaylist.setSelected(true);
-            checkbox = itemView.findViewById(R.id.type_checkbox);
             setting = itemView.findViewById(R.id.setting_playlist);
-            setting.setOnClickListener(this);
+            setting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (recyclerviewPlaylistItemOnClick != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            recyclerviewPlaylistItemOnClick.onPlaylistItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
         public void bind(Playlist playlist) {
 //            if (playlist.getCheck()) {
-                checkbox.setVisibility(View.VISIBLE);
-                setting.setVisibility(View.GONE);
 //            } else {
 //                checkbox.setVisibility(View.GONE);
-//                setting.setVisibility(View.VISIBLE);
+                setting.setVisibility(View.VISIBLE);
 //            }
             namePlaylist.setText(playlist.getName());
         }
