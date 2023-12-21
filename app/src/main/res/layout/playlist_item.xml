@@ -37,11 +37,11 @@
                 android:layout_height="wrap_content"
                 android:text="My playlist 01"
                 android:maxLines="1"
-                android:ellipsize="marquee"
                 android:singleLine="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
         </LinearLayout>

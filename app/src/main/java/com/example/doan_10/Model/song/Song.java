@@ -2,9 +2,10 @@ package com.example.doan_10.Model.song;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Song {
+public class Song implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("title")
@@ -25,7 +26,6 @@ public class Song {
     private List<String> listAlbum;
     @SerializedName("urlMusic")
     private String urlMusic;
-
     public Song(int id, String title, String releaseDate, String duration, String avatar, String genre, String nameArtist, List<Integer> listPlaylist, List<String> listAlbum, String urlMusic) {
         this.id = id;
         this.title = title;

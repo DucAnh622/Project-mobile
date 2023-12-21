@@ -1,7 +1,6 @@
 package com.example.doan_10.Adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
-import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 import com.example.doan_10.Model.artists.Artist;
-import com.example.doan_10.Model.Song;
 import com.example.doan_10.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder> {
@@ -51,6 +47,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ArtistView
         }
         String urlImage = artist.getAvatar();
         Picasso.get().load(urlImage).into(holder.imageArtist);
+        holder.nameArtist.setText(artist.getName());
     }
 
     @Override

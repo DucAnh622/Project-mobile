@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,9 +39,13 @@ import com.example.doan_10.View.TopArtistActivity;
 import com.example.doan_10.View.TopSongActivity;
 import com.example.doan_10.viewmodels.ListArtistViewModel;
 import com.example.doan_10.viewmodels.ListSongViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +69,7 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
     private ImageSlider slider;
     private ListArtistViewModel listArtistViewModel;
     private ListSongViewModel listSongViewModel;
-
+    private ProgressBar progressBar1,progressBar2;
     public Fragment_Home() {
         // Required empty public constructor
     }
@@ -105,15 +110,36 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
         top_artist = view.findViewById(R.id.artist_top_id);
         top_artist.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         top_song.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        progressBar1 = (ProgressBar) view.findViewById(R.id.progressBar1);
+        progressBar2 = (ProgressBar) view.findViewById(R.id.progressBar2);
+        Sprite wave = new Wave();
+        progressBar1.setIndeterminateDrawable(wave);
+        progressBar2.setIndeterminateDrawable(wave);
         listArtistViewModel = new ViewModelProvider(this).get(ListArtistViewModel.class);
         listArtistViewModel.getListArtist().observe(this.getViewLifecycleOwner(), list -> {
             artistAdapter = new ArtistAdapter(this.getContext(), list, this);
+            progressBar1.setVisibility(View.GONE);
             top_artist.setAdapter(artistAdapter);
         });
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this.getViewLifecycleOwner(), list -> {
             songAdapter = new SongAdapter(this.getContext(), list, this);
+            progressBar2.setVisibility(View.GONE);
+            songAdapter = new SongAdapter(this.getContext(), list, new RecyclerviewSongItemOnClick() {
+                @Override
+                public void onSongItemClick(int position) {
+                    Song song = list.get(position);
+                    List<Song> ListSong = list;
+                    Intent intent = new Intent(getContext(), ListenActivity.class);
+                    intent.putExtra("imageUrl", song.getAvatar());
+                    intent.putExtra("nameSong", song.getTitle());
+                    intent.putExtra("singer", song.getNameArtist());
+                    intent.putExtra("musicUrl", song.getUrlMusic());
+                    intent.putExtra("ListSong", (Serializable) list);
+                    intent.putExtra("IndexSong", position);
+                    startActivity(intent);
+                }
+            });
             top_song.setAdapter(songAdapter);
         });
 
@@ -153,14 +179,7 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
     @Override
     public void onSongItemClick(int position) {
 //        Song clickedSong = ListSong.get(position);
-//        Intent intent = new Intent(getContext(), ListenActivity.class);
-//        intent.putExtra("imageId", clickedSong.getImageId());
-//        intent.putExtra("nameSong", clickedSong.getNameSong());
-//        intent.putExtra("singer", clickedSong.getSinger());
-//        intent.putExtra("file", clickedSong.getFile());
-//        intent.putExtra("ListSong",ListSong);
-//        intent.putExtra("IndexSong", position);
-//        startActivity(intent);
+
     }
 
     @Override

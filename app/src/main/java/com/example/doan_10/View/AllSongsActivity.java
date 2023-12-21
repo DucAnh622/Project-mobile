@@ -11,27 +11,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.doan_10.Adapter.SongAdapter;
+import com.example.doan_10.Adapter.SongPlaylistAdapter;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
 
 import com.example.doan_10.R;
 import com.example.doan_10.View.FragmentHome.Fragment_Library;
 import com.example.doan_10.viewmodels.ListSongViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
 
 public class AllSongsActivity extends AppCompatActivity implements RecyclerviewSongItemOnClick {
     private Button back;
     private RecyclerView top_song;
-    private SongAdapter songAdapter;
+    private SongPlaylistAdapter songPlaylistAdapter;
     private ListSongViewModel listSongViewModel;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_songs);
         back = findViewById(R.id.BackView);
+        progressBar = findViewById(R.id.progressBar);
+        Sprite wave = new Wave();
+        progressBar.setIndeterminateDrawable(wave);
+        progressBar.setVisibility(View.GONE);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,8 +65,8 @@ public class AllSongsActivity extends AppCompatActivity implements RecyclerviewS
     private void prepareSongData() {
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this, list -> {
-            songAdapter = new SongAdapter(AllSongsActivity.this, list, this);
-            top_song.setAdapter(songAdapter);
+            songPlaylistAdapter = new SongPlaylistAdapter(AllSongsActivity.this, list, this);
+            top_song.setAdapter(songPlaylistAdapter);
         });
     }
 

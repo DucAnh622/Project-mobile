@@ -1,5 +1,6 @@
 package com.example.doan_10.View.FragmentHome;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,16 +22,23 @@ import com.example.doan_10.Adapter.ArtistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
+import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
+import com.example.doan_10.View.ListenActivity;
 import com.example.doan_10.viewmodels.ListArtistViewModel;
 import com.example.doan_10.viewmodels.ListSongViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment_Search#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnClick, RecyclerviewArtistItemOnClick {
+public class Fragment_Search extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +55,7 @@ public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnC
     private ListArtistViewModel listArtistViewModel;
     private ArtistAdapter artistAdapter;
     private SongAdapter songAdapter;
+    private ProgressBar progressBar1, progressBar2;
 
     public Fragment_Search() {
         // Required empty public constructor
@@ -88,6 +98,13 @@ public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnC
         listSearchSong = view.findViewById(R.id.list_rs_song);
         listSearchArtist.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         listSearchSong.setLayoutManager(new LinearLayoutManager(getContext()));
+        progressBar1 = (ProgressBar) view.findViewById(R.id.progressBar1);
+        progressBar2 = (ProgressBar) view.findViewById(R.id.progressBar2);
+        Sprite wave = new Wave();
+        progressBar1.setIndeterminateDrawable(wave);
+        progressBar2.setIndeterminateDrawable(wave);
+        progressBar1.setVisibility(View.GONE);
+        progressBar2.setVisibility(View.GONE);
         searchButton.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int i, KeyEvent keyEvent) {
@@ -114,24 +131,38 @@ public class Fragment_Search extends Fragment implements RecyclerviewSongItemOnC
     private void getSearchResult(String key) {
         listArtistViewModel = new ViewModelProvider(this).get(ListArtistViewModel.class);
         listArtistViewModel.getListArtistSearch(key).observe(this.getViewLifecycleOwner(), list ->{
-            artistAdapter = new ArtistAdapter(this.getContext(), list, this);
+            artistAdapter = new ArtistAdapter(this.getContext(), list, new RecyclerviewArtistItemOnClick() {
+                @Override
+                public void onArtistItemClick(int position) {
+
+                }
+            });
             listSearchArtist.setAdapter(artistAdapter);
+            progressBar1.setVisibility(View.GONE);
         });
 
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSongSearch(key).observe(this.getViewLifecycleOwner(), list -> {
-            songAdapter = new SongAdapter(this.getContext(), list, this);
+            songAdapter = new SongAdapter(this.getContext(), list, new RecyclerviewSongItemOnClick() {
+                @Override
+                public void onSongItemClick(int position) {
+                    Song song = list.get(position);
+                    List<Song> ListSong = list;
+                    Intent intent = new Intent(getContext(), ListenActivity.class);
+                    intent.putExtra("imageUrl", song.getAvatar());
+                    intent.putExtra("nameSong", song.getTitle());
+                    intent.putExtra("singer", song.getNameArtist());
+                    intent.putExtra("musicUrl", song.getUrlMusic());
+//                    ArrayList<Song> arrSong = list.stream().collect(Collectors.toCollection(ArrayList::new));
+                    intent.putExtra("ListSong", (Serializable) list);
+                    intent.putExtra("IndexSong", position);
+                    startActivity(intent);
+                }
+            });
             listSearchSong.setAdapter(songAdapter);
+            progressBar2.setVisibility(View.GONE);
         });
     }
 
-    @Override
-    public void onArtistItemClick(int position) {
 
-    }
-
-    @Override
-    public void onSongItemClick(int position) {
-
-    }
 }

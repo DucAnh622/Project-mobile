@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.example.doan_10.Adapter.ArtistAdapter;
 import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
@@ -17,6 +18,8 @@ import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
 import com.example.doan_10.Model.artists.Artist;
 import com.example.doan_10.R;
 import com.example.doan_10.viewmodels.ListArtistViewModel;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.Wave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +29,14 @@ public class TopArtistActivity extends AppCompatActivity implements Recyclerview
     private RecyclerView top_artist;
     private ArtistAdapter artistAdapter;
     private ListArtistViewModel listArtistViewModel;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_artist);
+        progressBar = findViewById(R.id.progressBar);
+        Sprite wave = new Wave();
+        progressBar.setIndeterminateDrawable(wave);
         top_artist = findViewById(R.id.artist_top);
         top_artist.setLayoutManager(new GridLayoutManager(TopArtistActivity.this, 3));
 
@@ -37,6 +44,7 @@ public class TopArtistActivity extends AppCompatActivity implements Recyclerview
         listArtistViewModel.getListArtist().observe(this, listArtist -> {
             List<Artist> list = listArtist;
             artistAdapter = new ArtistAdapter(TopArtistActivity.this, list, this);
+            progressBar.setVisibility(View.GONE);
             top_artist.setAdapter(artistAdapter);
         });
 
