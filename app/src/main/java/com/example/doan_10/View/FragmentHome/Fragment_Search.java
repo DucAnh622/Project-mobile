@@ -22,9 +22,11 @@ import com.example.doan_10.Adapter.ArtistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
+import com.example.doan_10.Model.artists.Artist;
 import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.ListenActivity;
+import com.example.doan_10.View.SongArtistActivity;
 import com.example.doan_10.viewmodels.ListArtistViewModel;
 import com.example.doan_10.viewmodels.ListSongViewModel;
 import com.github.ybq.android.spinkit.sprite.Sprite;
@@ -134,7 +136,12 @@ public class Fragment_Search extends Fragment {
             artistAdapter = new ArtistAdapter(this.getContext(), list, new RecyclerviewArtistItemOnClick() {
                 @Override
                 public void onArtistItemClick(int position) {
-
+                    Artist artist = list.get(position);
+                    Intent intent = new Intent(getContext(), SongArtistActivity.class);
+                    intent.putExtra("imageUrl", artist.getAvatar());
+                    intent.putExtra("nameArtist", artist.getName());
+                    intent.putExtra("idArtist", artist.getId());
+                    startActivity(intent);
                 }
             });
             listSearchArtist.setAdapter(artistAdapter);

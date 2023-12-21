@@ -92,4 +92,26 @@ public class ListSongRepository {
         });
         return mutableLiveData;
     }
+
+    public MutableLiveData<List<Song>> getMutableLiveDataByIdPlaylist(int id_playlist){
+        RestApiService apiService = RetrofitInstance.getApiService();
+        Call<ListSong> call = apiService.getSongByIdPlaylist(id_playlist);
+        call.enqueue(new Callback<ListSong>() {
+            @Override
+            public void onResponse(Call<ListSong> call, Response<ListSong> response) {
+                ListSong list = response.body();
+                if (list != null && list.getList_song() != null){
+                    listSong = (ArrayList<Song>) list.getList_song();
+                    mutableLiveData.setValue(listSong);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ListSong> call, Throwable t) {
+                Log.d("listsize", "-> Error   " + t.getMessage());
+                Log.e("phuc", "load xit roi");
+            }
+        });
+        return mutableLiveData;
+    }
 }
