@@ -26,4 +26,8 @@ public class ListSongViewModel extends AndroidViewModel {
     public LiveData<List<Song>> getListSongByIdArtist(Integer id_artist){
         return listSongRepository.getMutableLiveDataByIdArtist(id_artist);
     }
+
+    public LiveData<List<Song>> getListSongByIdPlaylist(Integer id_playlist){
+        return listSongRepository.getMutableLiveDataByIdPlaylist(id_playlist);
+    }
 }

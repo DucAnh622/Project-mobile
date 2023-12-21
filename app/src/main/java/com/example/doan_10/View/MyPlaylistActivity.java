@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.doan_10.Adapter.PlaylistAdapter;
 import com.example.doan_10.Interface.RecyclerviewPlaylistItemOnClick;
+import com.example.doan_10.Model.artists.Artist;
 import com.example.doan_10.Model.playlist.Playlist;
 import com.example.doan_10.R;
 import com.example.doan_10.viewmodels.PlaylistViewModel;
@@ -64,7 +65,10 @@ public class MyPlaylistActivity extends AppCompatActivity {
                 @Override
                 public void onPlaylistItemClick(int position) {
                     Playlist playlist = playlists.get(position);
-                    Toast.makeText(MyPlaylistActivity.this, playlist.getName(), Toast.LENGTH_SHORT);
+                    Intent intent = new Intent(MyPlaylistActivity.this, SongPlaylistActivity.class);
+                    intent.putExtra("idPlaylist", playlist.getId());
+                    intent.putExtra("namePlaylist", playlist.getName());
+                    startActivity(intent);
                 }
             });
             my_playlist.setAdapter(playlistAdapter);

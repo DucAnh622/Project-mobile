@@ -49,4 +49,7 @@ public interface RestApiService {
             @Field("username") String username,
             @Field("password") String password
     );
+    @GET("song/playlist_id/{id_playlist}")
+    Call<ListSong> getSongByIdPlaylist(@Path("id_playlist") int id_playlist);
+
 }
