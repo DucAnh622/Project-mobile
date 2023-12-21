@@ -32,4 +32,6 @@ public interface RestApiService {
     @FormUrlEncoded
     @POST("playlist/create")
     Call<String> creatPlaylist(@Field("name") String name, @Field("user_id") int user_id);
+    @GET("song/playlist_id/{id_playlist}")
+    Call<ListSong> getSongByIdPlaylist(@Path("id_playlist") int id_playlist);
 }

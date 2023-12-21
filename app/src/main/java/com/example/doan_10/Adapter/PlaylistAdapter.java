@@ -45,7 +45,15 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
         holder.bind(playList);
     }
 
-    public class PlaylistViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+    @Override
+    public int getItemCount() {
+        if (playlists != null && playlists.size() > 0)
+            return playlists.size();
+        else
+            return 0;
+    }
+
+    public class PlaylistViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
         private TextView namePlaylist;
 
         private Button setting;
@@ -55,7 +63,7 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
             namePlaylist = itemView.findViewById(R.id.playlist_name_id);
             namePlaylist.setSelected(true);
             setting = itemView.findViewById(R.id.setting_playlist);
-            setting.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (recyclerviewPlaylistItemOnClick != null) {
@@ -77,13 +85,6 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
             namePlaylist.setText(playlist.getName());
         }
 
-        @Override
-        public void onClick(View v) {
-            showSetting(v);
-            int position = getAbsoluteAdapterPosition()+1;
-            Toast.makeText(v.getContext(), "Item at position " + position + " clicked", Toast.LENGTH_SHORT).show();
-        }
-
         private void showSetting(View view) {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
             popupMenu.inflate(R.menu.playlist_setting);
@@ -103,11 +104,5 @@ public class PlaylistAdapter extends  RecyclerView.Adapter<PlaylistAdapter.Playl
             return true;
         }
     }
-    @Override
-    public int getItemCount() {
-        if (playlists != null && playlists.size() > 0)
-            return playlists.size();
-        else
-            return 0;
-    }
+
 }
