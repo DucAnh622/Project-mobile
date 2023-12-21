@@ -40,11 +40,11 @@ public class AddSongPlaylistActivity extends AppCompatActivity {
             }
         });
 
-        preparePlaylistData();
-        my_playlist = findViewById(R.id.check_add_song);
-        my_playlist.setLayoutManager(new LinearLayoutManager(AddSongPlaylistActivity.this));
-        playlistAdapter = new PlaylistAdapter(AddSongPlaylistActivity.this,Playlists);
-        my_playlist.setAdapter(playlistAdapter);
+//        preparePlaylistData();
+//        my_playlist = findViewById(R.id.check_add_song);
+//        my_playlist.setLayoutManager(new LinearLayoutManager(AddSongPlaylistActivity.this));
+//        playlistAdapter = new PlaylistAdapter(AddSongPlaylistActivity.this,Playlists);
+//        my_playlist.setAdapter(playlistAdapter);
     }
 
     private void preparePlaylistData() {

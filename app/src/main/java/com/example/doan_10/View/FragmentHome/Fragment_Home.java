@@ -27,6 +27,7 @@ import com.example.doan_10.Adapter.PlaylistAdapter;
 import com.example.doan_10.Adapter.SongAdapter;
 import com.example.doan_10.Interface.RecyclerviewArtistItemOnClick;
 import com.example.doan_10.Interface.RecyclerviewSongItemOnClick;
+import com.example.doan_10.Model.artists.Artist;
 import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.View.AddSongPlaylistActivity;
@@ -117,14 +118,23 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
         progressBar2.setIndeterminateDrawable(wave);
         listArtistViewModel = new ViewModelProvider(this).get(ListArtistViewModel.class);
         listArtistViewModel.getListArtist().observe(this.getViewLifecycleOwner(), list -> {
-            artistAdapter = new ArtistAdapter(this.getContext(), list, this);
+            artistAdapter = new ArtistAdapter(this.getContext(), list, new RecyclerviewArtistItemOnClick() {
+                @Override
+                public void onArtistItemClick(int position) {
+                    Artist artist = list.get(position);
+                    Intent intent = new Intent(getContext(), SongArtistActivity.class);
+                    intent.putExtra("imageUrl", artist.getAvatar());
+                    intent.putExtra("nameArtist", artist.getName());
+                    intent.putExtra("idArtist", artist.getId());
+                    startActivity(intent);
+                }
+            });
             progressBar1.setVisibility(View.GONE);
             top_artist.setAdapter(artistAdapter);
         });
         listSongViewModel = new ViewModelProvider(this).get(ListSongViewModel.class);
         listSongViewModel.getListSong().observe(this.getViewLifecycleOwner(), list -> {
-            songAdapter = new SongAdapter(this.getContext(), list, this);
-            progressBar2.setVisibility(View.GONE);
+
             songAdapter = new SongAdapter(this.getContext(), list, new RecyclerviewSongItemOnClick() {
                 @Override
                 public void onSongItemClick(int position) {
@@ -140,6 +150,7 @@ public class Fragment_Home extends Fragment implements RecyclerviewSongItemOnCli
                     startActivity(intent);
                 }
             });
+            progressBar2.setVisibility(View.GONE);
             top_song.setAdapter(songAdapter);
         });
 
