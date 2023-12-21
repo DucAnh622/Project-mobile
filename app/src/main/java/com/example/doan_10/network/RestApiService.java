@@ -32,4 +32,21 @@ public interface RestApiService {
     @FormUrlEncoded
     @POST("playlist/create")
     Call<String> creatPlaylist(@Field("name") String name, @Field("user_id") int user_id);
+
+    @FormUrlEncoded
+    @POST("register")
+    Call<String> register(
+            @Field("firstname") String firstname,
+            @Field("lastname") String lastname,
+            @Field("email") String email,
+            @Field("username") String username,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<String> login(
+            @Field("username") String username,
+            @Field("password") String password
+    );
 }

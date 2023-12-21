@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.doan_10.Model.song.Song;
 import com.example.doan_10.R;
 import com.example.doan_10.viewmodels.SongViewModel;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListenActivity extends AppCompatActivity {
-    private Button back_listen, close_listen, random, prev, play, next, replay;
+    private Button back_listen, close_listen, favorite, prev, play, next, addPlaylist;
     private ImageView ImageSongId;
     private TextView SongName, SingerName, currentTime, totalTime;
     private String nameSong;
@@ -46,11 +48,11 @@ public class ListenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listen);
         back_listen = findViewById(R.id.back_listen);
         close_listen = findViewById(R.id.Close_listen);
-        random = findViewById(R.id.random_id);
+        favorite = findViewById(R.id.favorite_id);
         prev = findViewById(R.id.prev_id);
         play = findViewById(R.id.play_id);
         next = findViewById(R.id.next_id);
-        replay = findViewById(R.id.replay_id);
+        addPlaylist = findViewById(R.id.add_id);
 
         seekBar = findViewById(R.id.seekBar_id);
 
@@ -113,6 +115,20 @@ public class ListenActivity extends AppCompatActivity {
         });
 
         updateSeekBar();
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ListenActivity.this, "Add favorite successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        addPlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ListenActivity.this, "Add playlist successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
