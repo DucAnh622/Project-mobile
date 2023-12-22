@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
@@ -35,10 +37,14 @@ public class MyPlaylistActivity extends AppCompatActivity {
     private ArrayList<Playlist> Playlists;
     private PlaylistAdapter playlistAdapter;
     private PlaylistViewModel playlistViewModel;
+    private Integer user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_playlist);
+        SharedPreferences sharedPreferences = getSharedPreferences("IdUser", Context.MODE_PRIVATE);
+        user_id = sharedPreferences.getInt("id_user", 0);
+        Intent intent = getIntent();
         back = findViewById(R.id.BackView);
         AddPlaylist = findViewById(R.id.AddPlaylist);
         back.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +66,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
     }
     private void preparePlaylistData() {
         playlistViewModel = new ViewModelProvider(this).get(PlaylistViewModel.class);
-        playlistViewModel.getAllPlaylist().observe(this, playlists -> {
+        playlistViewModel.getAllPlaylistByUserId(user_id).observe(this, playlists -> {
             playlistAdapter = new PlaylistAdapter(MyPlaylistActivity.this, playlists, new RecyclerviewPlaylistItemOnClick() {
                 @Override
                 public void onPlaylistItemClick(int position) {
@@ -120,7 +126,7 @@ public class MyPlaylistActivity extends AppCompatActivity {
                 }
                 else {
                     playlistViewModel = new ViewModelProvider(MyPlaylistActivity.this).get(PlaylistViewModel.class);
-                    playlistViewModel.createPlaylist(name_playlist, 1);
+                    playlistViewModel.createPlaylist(name_playlist, user_id);
                     Toast.makeText(MyPlaylistActivity.this, "Created playlist "+name_playlist, Toast.LENGTH_SHORT).show();
                     preparePlaylistData();
                     dialog.dismiss();

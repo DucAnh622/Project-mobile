@@ -20,20 +20,21 @@ public class LoginRepository {
 
         RestApiService apiService = RetrofitInstance.getApiService();
 
-        Call<String> call = apiService.login(username,password);
-        call.enqueue(new Callback<String>() {
+        Call<Void> call = apiService.login(username,password);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful() && response.code() == 200){
-                    String rs = response.body();
-                    Log.d("status_create", rs);
+                    Log.d("status_create", "successful!");
                 }
-                Log.d("status_create", "fail!");
+                else {
+                    Log.d("status_create", "fail!");
+                }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e("status_connect", "fail");
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
     }

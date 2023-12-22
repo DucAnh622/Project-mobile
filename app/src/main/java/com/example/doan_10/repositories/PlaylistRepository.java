@@ -45,22 +45,55 @@ public class PlaylistRepository {
         return mutableLiveDataListPlaylist;
     }
 
-    public void createPlaylistByName(String name, int userId){
+    public MutableLiveData<List<Playlist>> getMutableLiveDataAllPlaylistByUserId(int user_id){
         RestApiService apiService = RetrofitInstance.getApiService();
-        Call<String> call = apiService.creatPlaylist(name, userId);
-        call.enqueue(new Callback<String>() {
+        Call<List<Playlist>> call = apiService.getPlaylistByUserId(user_id);
+        call.enqueue(new Callback<List<Playlist>>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful() && response.code() == 201){
-                    String rs = response.body();
-                    Log.d("status_create", rs);
+            public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
+                List<Playlist> playlistList = response.body();
+                if (playlistList != null){
+                    playlists = playlistList;
+                    mutableLiveDataListPlaylist.setValue(playlists);
                 }
-                Log.d("status_create", "fail!");
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e("status_connect", "fail");
+            public void onFailure(Call<List<Playlist>> call, Throwable t) {
+                Log.d("listsize", "-> Error   " + t.getMessage());
+            }
+        });
+        return mutableLiveDataListPlaylist;
+    }
+
+    public void createPlaylistByName(String name, int userId){
+        RestApiService apiService = RetrofitInstance.getApiService();
+        Call<Void> call = apiService.creatPlaylist(name, userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("status", "created playlist");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("status", "fail!");
+            }
+        });
+    }
+
+    public void addSongToPlaylist(Integer playlist_id, Integer song_id){
+        RestApiService apiService = RetrofitInstance.getApiService();
+        Call<Void> call = apiService.addSongToPlaylist(playlist_id, song_id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("status_add_song", "add song to playlist successful");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
     }

@@ -81,6 +81,7 @@ public class SongPlaylistActivity extends AppCompatActivity implements Recyclerv
                     intent.putExtra("musicUrl", song.getUrlMusic());
                     intent.putExtra("ListSong", (Serializable) list);
                     intent.putExtra("IndexSong", position);
+                    intent.putExtra("idSong", song.getId());
                     startActivity(intent);
                 }
             });

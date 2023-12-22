@@ -19,20 +19,19 @@ public class RegisterRepository {
 
         RestApiService apiService = RetrofitInstance.getApiService();
 
-        Call<String> call = apiService.register(firstname,lastname,email,username,password);
-        call.enqueue(new Callback<String>() {
+        Call<Void> call = apiService.register(firstname,lastname,email,username,password);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful() && response.code() == 201){
-                    String rs = response.body();
-                    Log.d("status_create", rs);
+                    Log.d("status_create", "successful!");
                 }
                 Log.d("status_create", "fail!");
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.e("status_connect", "fail");
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
     }

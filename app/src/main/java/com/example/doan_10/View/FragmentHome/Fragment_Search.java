@@ -163,6 +163,7 @@ public class Fragment_Search extends Fragment {
 //                    ArrayList<Song> arrSong = list.stream().collect(Collectors.toCollection(ArrayList::new));
                     intent.putExtra("ListSong", (Serializable) list);
                     intent.putExtra("IndexSong", position);
+                    intent.putExtra("idSong", song.getId());
                     startActivity(intent);
                 }
             });
