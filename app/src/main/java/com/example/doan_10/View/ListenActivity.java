@@ -131,6 +131,10 @@ public class ListenActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(ListenActivity.this, "Please login to access!", Toast.LENGTH_SHORT).show();
                     Intent intent12 = new Intent(ListenActivity.this, LoginActivity.class);
+                    if (mediaPlayer != null) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
                     startActivity(intent12);
                 }
             }
@@ -151,6 +155,10 @@ public class ListenActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(ListenActivity.this, "Please login to access!", Toast.LENGTH_SHORT).show();
                     Intent intent11 = new Intent(ListenActivity.this, LoginActivity.class);
+                    if (mediaPlayer != null) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                    }
                     startActivity(intent11);
                 }
 
