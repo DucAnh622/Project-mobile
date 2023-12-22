@@ -77,6 +77,7 @@ public class AddSongPlaylistActivity extends AppCompatActivity {
                 }
             });
             my_playlist.setAdapter(playlistAdapter);
+
         });
     }
     @Override
