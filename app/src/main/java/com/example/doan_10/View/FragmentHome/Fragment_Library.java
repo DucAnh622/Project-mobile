@@ -1,6 +1,8 @@
 package com.example.doan_10.View.FragmentHome;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.doan_10.R;
 import com.example.doan_10.View.AllSongsActivity;
+import com.example.doan_10.View.LoginActivity;
 import com.example.doan_10.View.MyHistoryActivity;
 import com.example.doan_10.View.MyPlaylistActivity;
 
@@ -69,6 +73,9 @@ public class Fragment_Library extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment__library, container, false);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("IdUser", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int userID = sharedPreferences.getInt("id_user",0);
         LinearLayout[] linearLayouts = new LinearLayout[3];
         int[] linearLayoutIds = {R.id.allSongs, R.id.allPlaylists, R.id.allHistory};
         for (int i = 0; i < linearLayouts.length; i++) {
@@ -79,16 +86,37 @@ public class Fragment_Library extends Fragment {
                 public void onClick(View v) {
                     switch (index) {
                         case 0:
-                            Intent intent1 = new Intent(getActivity(), AllSongsActivity.class);
-                            startActivity(intent1);
+                            if(userID != 0) {
+                                Intent intent11 = new Intent(getActivity(), AllSongsActivity.class);
+                                startActivity(intent11);
+                            }
+                            else {
+                                Toast.makeText(getContext(), "Please login to access!", Toast.LENGTH_SHORT).show();
+                                Intent intent12 = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent12);
+                            }
                             break;
                         case 1:
-                            Intent intent2 = new Intent(getActivity(), MyPlaylistActivity.class);
-                            startActivity(intent2);
+                            if(userID != 0) {
+                                Intent intent21 = new Intent(getActivity(), MyPlaylistActivity.class);
+                                startActivity(intent21);
+                            }
+                            else {
+                                Toast.makeText(getContext(), "Please login to access!", Toast.LENGTH_SHORT).show();
+                                Intent intent22 = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent22);
+                            }
                             break;
                         case 2:
-                            Intent intent3 = new Intent(getActivity(), MyHistoryActivity.class);
-                            startActivity(intent3);
+                            if(userID != 0) {
+                                Intent intent31 = new Intent(getActivity(), MyHistoryActivity.class);
+                                startActivity(intent31);
+                            }
+                            else {
+                                Toast.makeText(getContext(), "Please login to access!", Toast.LENGTH_SHORT).show();
+                                Intent intent32 = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent32);
+                            }
                             break;
                     }
                 }

@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/background_Menu"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/Menu_Fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_Menu"
         android:orientation="vertical"
         android:paddingBottom="150dp"
         tools:context=".View.FragmentHome.Fragment_Menu">
@@ -42,7 +42,7 @@
                 android:orientation="vertical"
                 android:padding="10dp"
                 android:background="@drawable/form_setting"
-                android:visibility="visible">
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/Image_User"
                     android:layout_width="80dp"
@@ -232,6 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="visible"
                 android:padding="15dp">
                 <RelativeLayout
                     android:layout_width="match_parent"

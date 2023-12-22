@@ -1,7 +1,9 @@
 package com.example.doan_10.View.FragmentHome;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,12 +14,14 @@ import android.view.LayoutInflater;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.doan_10.R;
+import com.example.doan_10.View.LoginActivity;
 import com.example.doan_10.View.MyPlaylistActivity;
 import com.example.doan_10.View.SongArtistActivity;
 
@@ -38,8 +42,8 @@ public class Fragment_Menu extends Fragment {
     private String mParam2;
 
     private View view;
-
-    private Button loginBTN;
+    private LinearLayout manage_account, Account_Logout, Account_Login;
+    private Button loginBTN, logoutBTN;
 
     public Fragment_Menu() {
         // Required empty public constructor
@@ -77,6 +81,31 @@ public class Fragment_Menu extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment__menu, container, false);
         loginBTN = view.findViewById(R.id.toLogin);
+        Account_Logout = view.findViewById(R.id.Account_Logout);
+        Account_Login = view.findViewById(R.id.Account_Login);
+        manage_account = view.findViewById(R.id.Manage_Account);
+        logoutBTN = view.findViewById(R.id.toLogout);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("IdUser", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int userID = sharedPreferences.getInt("id_user",0);
+        if (userID != 0) {
+            manage_account.setVisibility(View.VISIBLE);
+            Account_Login.setVisibility(View.GONE);
+            Account_Logout.setVisibility(View.VISIBLE);
+        }
+
+        logoutBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.clear();
+                editor.putInt("id_user",0);
+                editor.apply();
+                manage_account.setVisibility(View.GONE);
+                Account_Login.setVisibility(View.VISIBLE);
+                Account_Logout.setVisibility(View.GONE);
+            }
+        });
 
         RelativeLayout[] relativeLayouts = new RelativeLayout[4];
         int[] relativeLayoutIds = {R.id.setting, R.id.infor, R.id.support, R.id.contact};
