@@ -3,7 +3,9 @@ package com.example.doan_10.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,6 +57,9 @@ public class ListenActivity extends AppCompatActivity {
         addPlaylist = findViewById(R.id.add_id);
 
         seekBar = findViewById(R.id.seekBar_id);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("IdUser", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int userID = sharedPreferences.getInt("id_user",0);
 
         // Xoay ảnh
         ImageSongId = findViewById(R.id.ImageId);
@@ -120,20 +125,35 @@ public class ListenActivity extends AppCompatActivity {
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ListenActivity.this, "Add favorite successfully!", Toast.LENGTH_SHORT).show();
+                if (userID != 0){
+                    Toast.makeText(ListenActivity.this, "Add favorite successfully!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(ListenActivity.this, "Please login to access!", Toast.LENGTH_SHORT).show();
+                    Intent intent12 = new Intent(ListenActivity.this, LoginActivity.class);
+                    startActivity(intent12);
+                }
             }
         });
 
         addPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mediaPlayer.pause();
-                rotationAnimator.pause();
-                play.setBackgroundResource(R.drawable.baseline_play_circle_24);
-                Toast.makeText(ListenActivity.this, "Add playlist successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent_s = new Intent(ListenActivity.this, AddSongPlaylistActivity.class);
-                intent_s.putExtra("idSong", id_song);
-                startActivity(intent_s);
+                if (userID != 0){
+                    mediaPlayer.pause();
+                    rotationAnimator.pause();
+                    play.setBackgroundResource(R.drawable.baseline_play_circle_24);
+                    Toast.makeText(ListenActivity.this, "Add playlist successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent_s = new Intent(ListenActivity.this, AddSongPlaylistActivity.class);
+                    intent_s.putExtra("idSong", id_song);
+                    startActivity(intent_s);
+                }
+                else {
+                    Toast.makeText(ListenActivity.this, "Please login to access!", Toast.LENGTH_SHORT).show();
+                    Intent intent11 = new Intent(ListenActivity.this, LoginActivity.class);
+                    startActivity(intent11);
+                }
+
             }
         });
 
