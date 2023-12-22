@@ -63,11 +63,17 @@ public class AddSongPlaylistActivity extends AppCompatActivity {
 
     private void preparePlaylistData() {
         playlistViewModel = new ViewModelProvider(this).get(PlaylistViewModel.class);
-        playlistViewModel.getAllPlaylist().observe(this, playlists -> {
+        playlistViewModel.getAllPlaylistByUserId(id_user).observe(this, playlists -> {
             playlistAdapter = new PlaylistAdapter(AddSongPlaylistActivity.this, playlists, new RecyclerviewPlaylistItemOnClick() {
                 @Override
                 public void onPlaylistItemClick(int position) {
                     playlistViewModel.addSongToPlaylist(playlists.get(position).getId(), id_song);
+                    Toast.makeText(AddSongPlaylistActivity.this, "Add success full!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AddSongPlaylistActivity.this, ListenActivity.class);
+                    intent.putExtra("selected_fragment", "library");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(intent);
+                    finish();
                 }
             });
             my_playlist.setAdapter(playlistAdapter);
