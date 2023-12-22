@@ -60,6 +60,7 @@ public class TopSongActivity extends AppCompatActivity implements RecyclerviewSo
                     intent.putExtra("musicUrl", song.getUrlMusic());
                     intent.putExtra("ListSong", (Serializable) list);
                     intent.putExtra("IndexSong", position);
+                    intent.putExtra("idSong", song.getId());
                     startActivity(intent);
                 }
             });

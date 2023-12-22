@@ -21,7 +21,15 @@ public class PlaylistViewModel extends AndroidViewModel {
         return playlistRepository.getMutableLiveDataAllPlaylist();
     }
 
+    public LiveData<List<Playlist>> getAllPlaylistByUserId(Integer user_id){
+        return playlistRepository.getMutableLiveDataAllPlaylistByUserId(user_id);
+    }
+
     public void createPlaylist(String name, Integer userId){
         playlistRepository.createPlaylistByName(name, userId);
+    }
+
+    public void addSongToPlaylist(Integer playlist_id, Integer song_id){
+        playlistRepository.addSongToPlaylist(playlist_id, song_id);
     }
 }

@@ -81,6 +81,7 @@ public class ListenActivity extends AppCompatActivity {
             imageUrl = intent.getStringExtra("imageUrl");
             nameSong = intent.getStringExtra("nameSong");
             singer = intent.getStringExtra("singer");
+            id_song = intent.getIntExtra("idSong", 0);
             Picasso.get().load(imageUrl).into(ImageSongId);
             SongName.setText(nameSong);
             SingerName.setText(singer);
@@ -126,7 +127,13 @@ public class ListenActivity extends AppCompatActivity {
         addPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.pause();
+                rotationAnimator.pause();
+                play.setBackgroundResource(R.drawable.baseline_play_circle_24);
                 Toast.makeText(ListenActivity.this, "Add playlist successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent_s = new Intent(ListenActivity.this, AddSongPlaylistActivity.class);
+                intent_s.putExtra("idSong", id_song);
+                startActivity(intent_s);
             }
         });
 
